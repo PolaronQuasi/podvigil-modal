@@ -191,6 +191,11 @@ absence of that gate is useful only with the recorded protocol and an exact uplo
 bytes verify twice. That narrow case cleans its backed-up inputs and returns `no_capacity` (4).
 Missing protocol evidence in older jobs cannot be retroactively invented; storage stays retained.
 
+Recovery of a Volume with a saved exclusive-create acknowledgement can repeat its exact recorded
+name/environment lookup once. A hit becomes an ID receipt with provenance, followed by the normal
+ownership and backup checks. Misses and errors leave it unknown. This is a read, never another
+create, and deletion still uses the verified ID.
+
 ### Startup and run allowances
 
 `startup_timeout_seconds` optionally allows 1–86400 seconds for startup. The fixed absolute deadline

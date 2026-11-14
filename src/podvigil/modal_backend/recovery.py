@@ -213,6 +213,22 @@ def recover_outputs(
     resource = job["volume"]
     if resource["state"] in ("not_created", "deleted"):
         return completed_outcome(job) or job.get("outcome") or "error"
+    if (
+        resource["state"] == "unknown"
+        and resource.get("create_acknowledged") is True
+        and not resource.get("id")
+    ):
+        try:
+            found = provider.resolve_volume(job)
+        except Exception:
+            found = None  # Failed reads and misses leave the creation receipt unresolved.
+        if found:
+            resource.update(
+                state="exists",
+                id=found,
+                evidence="exclusive acknowledged create; exact recorded name and environment lookup",
+            )
+            update(folder, job)
     if resource["state"] != "exists" or not resource.get("id"):
         raise LifecycleError("Volume creation is unresolved; nothing is deleted by name.")
     volume_id = resource["id"]

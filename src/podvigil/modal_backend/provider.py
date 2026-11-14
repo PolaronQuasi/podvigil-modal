@@ -83,15 +83,25 @@ class Provider:
         acknowledged()  # Persist the successful create reply even if the following lookup fails.
         for attempt in range(3):
             try:
-                volume = self.modal.Volume.from_name(
-                    name, environment_name=self.spec["environment"]
-                )
-                volume.hydrate()
-                return volume.object_id
+                return self.lookup_volume(name)
             except Exception:
                 if attempt == 2:
                     raise
                 time.sleep(attempt + 1)  # Read retries only; never another create.
+
+    def lookup_volume(self, name):
+        volume = self.modal.Volume.from_name(
+            name, environment_name=self.spec["environment"], create_if_missing=False
+        )
+        volume.hydrate()
+        return volume.object_id
+
+    def resolve_volume(self, job):
+        """Repeat the acknowledged create's exact read, never create or infer absence."""
+        try:
+            return self.lookup_volume(job["volume"]["name"])
+        except self.modal.exception.NotFoundError:
+            return None
 
     def build_image(self, allowance):
         if allowance <= 0:

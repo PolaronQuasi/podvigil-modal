@@ -163,11 +163,15 @@ On POSIX, a directory-flush failure retains the cloud copy. If a crash happened 
 Volume deletion but before the final outcome write, recovery restores the audited backup outcome
 locally; it does not allocate or require a new provider session.
 
-Unknown Volume creation requires operator investigation. A successful Volume-create reply is saved
-as `create_acknowledged` before bounded ID-lookup retries; failure to obtain the ID still forbids
-deletion by name. A Sandbox may be reconciled with the exact intent and matching ownership tags, or
-with `recover JOB --sandbox-id ID` after the same tag checks. The lookup tries the SDK's running-GPU
-fallback after a terminated-inclusive miss. Two misses still mean unresolved, not absent.
+Unknown Volume creation without a successful create receipt requires operator investigation. A
+successful exclusive create is saved as `create_acknowledged` before bounded ID-lookup retries. For
+that acknowledged case, each `recover` may repeat the exact recorded name/environment lookup once. A
+hit records the ID and its provenance, then follows normal ownership, inputs/empty-Volume and backup
+checks. A miss or error leaves the Volume unresolved; it is never absence evidence. Deletion remains
+by the recovered ID, never by name. A Sandbox may be reconciled with the exact intent and matching
+ownership tags, or with `recover JOB --sandbox-id ID` after the same tag checks. The lookup tries
+the SDK's running-GPU fallback after a terminated-inclusive miss. Two misses still mean unresolved,
+not absent.
 
 Never repeat an ambiguous create. In SDK 1.6.4, a `ResourceExhaustedError` can be raised after a
 Sandbox was allocated while waiting for a GPU task. Exception names alone cannot prove rejection.
