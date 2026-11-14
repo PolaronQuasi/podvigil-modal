@@ -248,10 +248,11 @@ storage when the manifest is missing. `--accept-partial` is an explicit choice t
 all currently present files, then delete the Volume; it does not claim a complete training result.
 Malformed manifests, ownership mismatches and corrupted files still refuse deletion.
 
-A valid root-level `supervisor-error.json` written after the manifest is the single coverage
-exception. Its limited, typed diagnostic is still copied and independently verified like other
-files, then exposed in status. It does not change the manifest's workload outcome. See
-[recovery](OPERATIONS.md#recovery) for the exact limits and retained refusals.
+A root-level `supervisor-error.json` written after the manifest is the single coverage exception. It
+must be a valid, limited diagnostic unless `--accept-partial` explicitly accepts its unreadable
+bytes. In either case it is size-limited, copied and independently verified; status shows the typed
+diagnostic or a controlled unreadable notice. Its contents never override the manifest's workload
+outcome. See [recovery](OPERATIONS.md#recovery) for the exact limits and retained refusals.
 
 If the local computer shuts down, Modal's Sandbox timeout remains the compute backstop, but local
 backup and storage deletion wait for recovery. The worker does not survive a reboot. A provider or

@@ -270,18 +270,29 @@ def recover_outputs(
     diagnostic_name = "supervisor-error.json"
     if diagnostic_name in files:
         diagnostic_data = read_small(provider, volume_id, diagnostic_name, 65536)
-        supervisor_error = json.loads(diagnostic_data)
         diagnostic_receipt = {
             "size": len(diagnostic_data),
             "sha256": hashlib.sha256(diagnostic_data).hexdigest(),
         }
-        if (
-            not isinstance(supervisor_error, dict)
-            or set(supervisor_error) != {"error_type"}
-            or not isinstance(supervisor_error["error_type"], str)
-            or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]{0,127}", supervisor_error["error_type"])
-        ):
-            raise UserError("Supervisor error record is invalid; storage is retained.")
+        try:
+            supervisor_error = json.loads(diagnostic_data)
+            if (
+                not isinstance(supervisor_error, dict)
+                or set(supervisor_error) != {"error_type"}
+                or not isinstance(supervisor_error["error_type"], str)
+                or not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]{0,127}", supervisor_error["error_type"])
+            ):
+                raise ValueError
+        except ValueError:
+            if not accept_partial:
+                raise UserError(
+                    "supervisor-error.json cannot be parsed or validated; storage is retained. "
+                    "Use recover --accept-partial to back up this diagnostic as opaque bytes."
+                ) from None
+            supervisor_error = {
+                "unreadable": True,
+                "note": "supervisor-error.json could not be parsed or validated; backed up as opaque bytes with --accept-partial.",
+            }
     manifest = None
     manifest_receipt = None
     unlisted_diagnostics = set()
