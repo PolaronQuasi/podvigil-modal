@@ -92,8 +92,8 @@ Recovery still requires terminal observations and a verified inputs-only backup 
 
 If status shows `runtime_start_error`, the worker could not read the start marker. It keeps
 monitoring within the existing deadline instead of stopping healthy work on that failed read.
-Cancellation still works, and a confirmed missing marker after the startup allowance ends stops the
-job for verified cleanup.
+Cancellation still works. A confirmed missing marker at least five seconds after the startup
+allowance ends stops the job for verified cleanup; the fixed deadline always takes precedence.
 
 Use a small image with the dependencies actually needed, preferably already cached and pinned by
 digest. Increasing startup time does not establish that a GPU is available. See the

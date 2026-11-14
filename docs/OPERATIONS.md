@@ -94,11 +94,12 @@ or a successful terminal observation. It does not end healthy compute. Ownership
 immediately. `observation_error` and `last_observed` distinguish uncertainty from a known state.
 
 Start-marker reads follow the same rule. `runtime_start_error` records a failed read separately, so
-successful Sandbox polls cannot hide it. At the startup deadline the worker takes a fresh marker
-observation: confirmed absence ends startup, but a transport failure keeps monitoring within the
-unchanged absolute deadline and native run timeout. Cancellation still takes effect. Ownership and
-metadata validation refusals stop monitoring immediately; other read failures remain visible as
-uncertainty.
+successful Sandbox polls cannot hide it. A fresh missing-marker observation can end startup only at
+least five seconds after the startup deadline, allowing for clock difference and visibility delay.
+This observation margin never extends the fixed deadline. A transport failure keeps monitoring
+within that deadline and the native timeout. Cancellation still takes effect immediately on the next
+control-loop check. Ownership and metadata validation refusals stop monitoring immediately; other
+read failures remain visible as uncertainty.
 
 The log mirror shares one allowance of at most five seconds across asynchronous Sandbox lookup,
 ownership verification, execution and stream reads. A mirror timeout cannot bypass ownership checks

@@ -211,8 +211,10 @@ without accepting partial outputs. Older jobs without the start protocol keep th
 
 A failed start-marker read is uncertainty, reported as `runtime_start_error`, not evidence that the
 workload missed its start allowance. The worker retries within the fixed absolute deadline; only a
-fresh missing-marker observation after the startup deadline ends startup early. The native run
-timeout and explicit cancellation remain effective during a metadata-read outage.
+fresh missing-marker observation at least five seconds after the startup deadline ends startup
+early. The fixed deadline caps this clock/visibility margin. The native timeout and explicit
+cancellation remain effective during a metadata-read outage; cancellation does not wait for the
+margin to expire.
 
 The run window begins at supervisor entry, so initialization, GPU discovery and the committed gate
 consume some of it. `finalize_seconds` remains inside that allowance. The workload receives the

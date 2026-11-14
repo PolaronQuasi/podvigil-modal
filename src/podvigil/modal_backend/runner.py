@@ -480,6 +480,7 @@ def monitor(provider, folder, job, *, clock=time.time, sleep=time.sleep):
     failures = 0
     next_observation = 0
     next_logs = 0
+    start_check_after = min(job["deadline"], job.get("startup_deadline", job["deadline"]) + 5)
     while True:
         best_effort_update(folder, job)
         if (folder / "cancel.json").exists():
@@ -501,8 +502,8 @@ def monitor(provider, folder, job, *, clock=time.time, sleep=time.sleep):
                             runtime_start=receipt,
                             run_deadline=min(job["deadline"], receipt["run_deadline"]),
                         )
-                    elif observed_at >= job["startup_deadline"]:
-                        # Only a fresh missing-marker read after the start allowance can
+                    elif observed_at >= start_check_after:
+                        # Only a fresh missing-marker read after the clock-skew margin can
                         # end startup. A failed read cannot prove that no workload started.
                         best_effort_update(folder, job, startup_expired=True)
                         return
@@ -513,8 +514,8 @@ def monitor(provider, folder, job, *, clock=time.time, sleep=time.sleep):
                         record_error(folder, exc)
                     best_effort_update(folder, job, runtime_start_error=safe_error(exc))
                 next_observation = (
-                    min(clock() + 5, job["startup_deadline"])
-                    if observed_at < job["startup_deadline"]
+                    min(clock() + 5, start_check_after)
+                    if observed_at < start_check_after
                     else clock() + 5
                 )
         try:
@@ -532,8 +533,12 @@ def monitor(provider, folder, job, *, clock=time.time, sleep=time.sleep):
                 record_error(folder, exc)
             best_effort_update(folder, job, observation_error=safe_error(exc))
         limit = min(job["deadline"], job.get("run_deadline", job["deadline"]))
-        if not job.get("runtime_start") and clock() < job.get("startup_deadline", 0):
-            limit = min(limit, job["startup_deadline"])
+        if (
+            "startup_deadline" in job
+            and not job.get("runtime_start")
+            and clock() < start_check_after
+        ):
+            limit = min(limit, start_check_after)
         if failures == 0 and clock() >= next_logs and limit > clock():
             try:
                 streams = provider.log_tail(job, allowance=min(5, limit - clock()))

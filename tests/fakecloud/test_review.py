@@ -108,7 +108,7 @@ class ReviewLifecycle(unittest.TestCase):
         self.assertEqual(result["outcome"], "success")
         self.assertNotIn("terminate", self.provider.calls)
 
-    def test_confirmed_missing_start_receipt_stops_at_start_deadline(self):
+    def test_confirmed_missing_start_receipt_stops_after_five_second_margin(self):
         started = self.enable_startup_allowance()
         terminated = []
 
@@ -120,10 +120,65 @@ class ReviewLifecycle(unittest.TestCase):
 
         self.provider.hook = hook
         result = self.run_job()
-        self.assertEqual(terminated, [started + 6])
+        self.assertEqual(terminated, [started + 11])
         self.assertEqual(result["outcome"], "no_capacity")
         self.assertEqual(result["terminal_observations"], 2)
         self.assertTrue(self.provider.deleted)
+
+    def test_marker_arriving_just_after_start_deadline_is_not_killed(self):
+        started = self.enable_startup_allowance()
+        original = self.provider.runtime_info
+
+        def receipt(record):
+            found = original(record)
+            return None if self.now < started + 7 else found
+
+        def hook(name):
+            if name == "poll":
+                self.provider.finish = self.now >= started + 14
+
+        self.provider.runtime_info = receipt
+        self.provider.hook = hook
+        result = self.run_job()
+        self.assertEqual(result["outcome"], "success")
+        self.assertNotIn("terminate", self.provider.calls)
+        self.assertEqual(result["deadline"], started + 96)
+
+    def test_missing_marker_grace_never_extends_fixed_deadline(self):
+        started = self.enable_startup_allowance()
+        self.job.update(startup_deadline=started + 6, deadline=started + 8)
+        save(self.folder / "modal-job.json", self.job)
+        terminated = []
+
+        def hook(name):
+            if name == "runtime_info":
+                self.provider.data.pop("runtime-start.json", None)
+            if name == "terminate":
+                terminated.append(self.now)
+
+        self.provider.hook = hook
+        self.run_job()
+        self.assertEqual(terminated, [started + 8])
+
+    def test_cancellation_during_marker_grace_is_not_delayed_until_its_end(self):
+        started = self.enable_startup_allowance()
+        signalled = []
+
+        def stop(record):
+            signalled.append(self.now)
+            self.provider.running = False
+
+        def hook(name):
+            if name == "runtime_info":
+                self.provider.data.pop("runtime-start.json", None)
+            if name == "poll" and self.now >= started + 6:
+                save(self.folder / "cancel.json", {})
+
+        self.provider.request_stop = stop
+        self.provider.hook = hook
+        result = self.run_job()
+        self.assertTrue(result["cancel_requested"])
+        self.assertLess(signalled[0], started + 11)
 
     def test_start_receipt_ownership_refusal_is_not_retried(self):
         self.enable_startup_allowance()
