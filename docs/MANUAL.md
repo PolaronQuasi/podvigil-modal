@@ -66,6 +66,11 @@ remains mandatory and completed closure returns `error` (1), never success. It c
 Cancellation signals the supervisor and gives it up to `finalize_seconds` within the original
 deadline to publish results. Hard termination remains the fallback. Publication is best effort.
 
+`recover --accept-partial` can also preserve a damaged root-level `supervisor-error.json` as opaque
+bytes. The 64 KiB limit, byte verification and all manifest checks remain. Status reports a
+controlled unreadable notice without showing the diagnostic's invalid contents; outcome rules still
+follow the manifest when one exists.
+
 The [configuration fields](MODAL.md#job-fields) and
 [smoke example](../examples/modal-smoke/modal-job.json) define the job format. The trusted workload
 writes checkpoints and final artifacts to `PODVIGIL_OUTPUT_DIR` and reads explicit uploaded files

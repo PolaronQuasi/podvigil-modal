@@ -200,13 +200,16 @@ errors may contain credentials or headers. `error.json` keeps the exception type
 basenames/line numbers, without raw messages, source lines or local variables.
 `supervisor-error.json` is a best-effort remote failure record, including a final sync failure after
 manifest publication. Recovery permits this one root-level record to be absent from the manifest,
-provided it is valid JSON containing only an `error_type` identifier and is at most 64 KiB. It is
-still backed up, hashed and independently read twice, and appears as `supervisor_error` in the
-ledger and status. Every manifest-listed file retains its hash check; other unlisted files still
-refuse deletion. The manifest decides the outcome: a verified success stays success, while
-`not_started` becomes `workload_failed`. The diagnostic is not an override or proof that no workload
-ran. A manifest also includes periodic-sync diagnostics; a slow periodic commit does not abort
-training. The final commit can use the whole remaining finalization window.
+provided it is valid JSON containing only an `error_type` identifier and is at most 64 KiB. With
+`--accept-partial`, an unreadable or invalid diagnostic is instead preserved as opaque bytes under
+the same size limit and coverage exception. Without that flag, recovery names the file and refuses.
+It is still backed up, hashed and independently read twice. `supervisor_error` in the ledger and
+status contains either the valid diagnostic or a controlled unreadable notice, never the invalid
+contents. Every manifest-listed file retains its hash check; other unlisted files still refuse
+deletion. The manifest decides the outcome: a verified success stays success, while `not_started`
+becomes `workload_failed`. The diagnostic is not an override or proof that no workload ran. A
+manifest also includes periodic-sync diagnostics; a slow periodic commit does not abort training.
+The final commit can use the whole remaining finalization window.
 
 Stopped compute and deleted storage are different facts. Provider retention, logs and other charges
 can outlive either. Review [operational limits](MODAL.md#operational-limits).
