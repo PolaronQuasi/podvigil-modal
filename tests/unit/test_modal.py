@@ -216,6 +216,24 @@ class ModalProvider(unittest.TestCase):
         self.sdk.Volume.from_id.return_value._instance_delete.assert_called_once_with()
         self.sdk.Volume.objects.delete.assert_not_called()
 
+    def test_volume_resolution_is_one_read_of_recorded_name_and_environment(self):
+        self.job["volume"]["name"] = "recorded-volume"
+        self.sdk.Volume.from_name.return_value.object_id = "vo-recovered"
+        self.assertEqual(self.provider.resolve_volume(self.job), "vo-recovered")
+        self.sdk.Volume.from_name.assert_called_once_with(
+            "recorded-volume", environment_name="test", create_if_missing=False
+        )
+        self.sdk.Volume.from_name.return_value.hydrate.assert_called_once_with()
+        self.sdk.Volume.objects.create.assert_not_called()
+
+    def test_volume_resolution_miss_never_creates(self):
+        self.job["volume"]["name"] = "recorded-volume"
+        self.sdk.exception.NotFoundError = FileNotFoundError
+        self.sdk.Volume.from_name.side_effect = FileNotFoundError
+        self.assertIsNone(self.provider.resolve_volume(self.job))
+        self.sdk.Volume.from_name.assert_called_once()
+        self.sdk.Volume.objects.create.assert_not_called()
+
     def test_owned_sandbox_tag_check_precedes_termination(self):
         self.sdk.Sandbox.from_id.return_value.get_tags.return_value = {
             "podvigil_job": "someone-else"
@@ -254,6 +272,10 @@ class ModalProvider(unittest.TestCase):
         # Synchronicity preserves the underlying manager method's self parameter in metadata.
         prefix = [None] if next(iter(signature.parameters)) == "self" else []
         signature.bind(*prefix, "test", version=2, allow_existing=False, environment_name="test")
+        inspect.signature(modal.Volume.from_name).bind(
+            "test", environment_name="test", create_if_missing=False
+        )
+        inspect.signature(modal.Volume.hydrate).bind(None)
         self.assertTrue(callable(getattr(modal.Volume, "_instance_delete", None)))
         self.assertTrue(callable(getattr(modal.Sandbox, "get_tags", None)))
         inspect.signature(modal.Sandbox.from_id.aio).bind("sb-test")

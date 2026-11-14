@@ -149,6 +149,10 @@ class FakeModal:
         self.call("resolve_sandbox")
         return None
 
+    def resolve_volume(self, record):
+        self.call("resolve_volume")
+        return None
+
     def files(self, volume_id):
         self.call("files")
         return {k: len(v) for k, v in self.data.items()}

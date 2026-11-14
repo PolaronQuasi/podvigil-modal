@@ -52,6 +52,10 @@ that was created has been verified, backed up and deleted; a start can also expi
 resource is requested. The outcome is never inferred from an SDK error class alone. Missing
 start-protocol evidence retains storage; unknown resource creation remains ambiguous.
 
+For an unknown Volume with a confirmed exclusive-create receipt, `recover` makes one read-only
+lookup using its recorded name and environment. A recovered ID is saved before normal ownership and
+backup checks. Lookup misses/errors leave it unknown; an unacknowledged create is never retried.
+
 Before its deadline, a running Sandbox is left alone by `recover` unless you pass `--stop-running`
 or have already requested cancellation. Recovery never resumes monitoring or creates a new job. Use
 `--sandbox-id ID` only to reconcile a lost receipt: both ownership tags must match the ledger. It
