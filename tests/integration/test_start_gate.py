@@ -2,17 +2,56 @@
 
 from pathlib import Path
 import json
+import hashlib
 import subprocess
 import sys
 import tempfile
 import time
 import unittest
 
-from podvigil.modal_backend import runtime
+from podvigil.modal_backend import recovery, runtime
+from tests.support.directory_modal import DirectoryModal
+from tests.support.modal import job
 
 
 @unittest.skipUnless(sys.platform.startswith("linux"), "Sandbox runtime requires Linux")
 class StartGate(unittest.TestCase):
+    def test_expired_overall_deadline_without_startup_recovers_inputs_only(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            root = folder / "volume"
+            root.mkdir()
+            ledger = folder / "ledger"
+            record = job(ledger)
+            record.update(start_protocol=1, deadline=time.time() - 5)
+            record["config"]["command"] = [sys.executable, "-c", "raise AssertionError('ran')"]
+            (root / "run.json").write_text(json.dumps(record))
+            (root / "owner.json").write_text(
+                json.dumps({"job_id": record["job_id"], "owner": record["owner"]})
+            )
+            original = {p.name: p.read_bytes() for p in root.iterdir()}
+            record["upload_manifest"] = {
+                name: {"size": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+                for name, data in original.items()
+            }
+            result = subprocess.run(
+                [sys.executable, "-B", runtime.__file__, str(root / "run.json")],
+                capture_output=True,
+                timeout=10,
+            )
+            self.assertEqual(result.returncode, 75, result.stderr)
+            self.assertEqual({p.name: p.read_bytes() for p in root.iterdir()}, original)
+            record["sandbox"].update(state="exists", id="sb-test")
+            record["volume"].update(state="exists", id="vo-test")
+            cloud = DirectoryModal(root, result.returncode)
+            self.assertEqual(
+                recovery.recover_outputs(cloud, ledger, record, sleep=lambda _: None),
+                "no_capacity",
+            )
+            self.assertTrue(cloud.deleted)
+            self.assertGreaterEqual(cloud.polls, 2)
+            self.assertEqual(record["no_workload_evidence"]["terminal_observations"], 2)
+
     def test_expired_start_and_failed_commit_never_execute_workload(self):
         for expired in (False, True):
             with self.subTest(expired=expired), tempfile.TemporaryDirectory() as directory:

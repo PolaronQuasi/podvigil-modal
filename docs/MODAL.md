@@ -192,6 +192,10 @@ including metadata commit and finalization, capped by the absolute deadline. Sta
 early does not lengthen the run. The price estimate uses only `timeout_seconds` and plan reports
 both allowances. Without the new field, the previous overall timeout semantics remain.
 
+A protocol-1 supervisor entering after that overall deadline exits with code 75 before any Volume
+write. Exact inputs-only inventory and verified terminal compute can then establish `no_capacity`
+without accepting partial outputs. Older jobs without the start protocol keep their existing path.
+
 A failed start-marker read is uncertainty, reported as `runtime_start_error`, not evidence that the
 workload missed its start allowance. The worker retries within the fixed absolute deadline; only a
 fresh missing-marker observation after the startup deadline ends startup early. The native run

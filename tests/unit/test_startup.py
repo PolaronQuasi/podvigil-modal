@@ -74,6 +74,14 @@ class StartupAllowance(unittest.TestCase):
         self.assertEqual(create.call_args.args[1], 550)
         self.assertEqual(create.call_args.kwargs["timeout"], 90)
 
+    def test_expired_overall_window_changes_only_start_protocol_jobs(self):
+        record = {"deadline": 100, "config": {"timeout_seconds": 30}}
+        self.assertEqual(runtime.runtime_window(record, 101, 10), 10)
+        record["start_protocol"] = 1
+        self.assertIsNone(runtime.runtime_window(record, 100, 10))
+        self.assertIsNone(runtime.runtime_window(record, 101, 10))
+        self.assertEqual(runtime.runtime_window(record, 99, 10), 11)
+
     def test_worker_preserves_preexisting_launch_deadline(self):
         with tempfile.TemporaryDirectory() as directory:
             folder = Path(directory)
