@@ -217,8 +217,11 @@ For startup failures, callers should distinguish these three cases:
 
 If the new startup allowance expires before the Sandbox request is sent, the saved
 `sandbox_create_not_sent` evidence replaces terminal observations of nonexistent compute. A Volume,
-if created, still goes through the existing verified inputs-backup path. Legacy failures keep their
-former classification. `no_capacity` is a no-start result, not proof that GPU stock was the cause.
+if created, still goes through the existing verified inputs-backup path. A protocol-1 supervisor
+that enters after the overall deadline also exits before writing, even without a separate startup
+allowance, and qualifies for the same verified no-start recovery. Jobs without the start protocol
+retain their previous behavior. `no_capacity` is a no-start result, not proof that GPU stock was the
+cause.
 
 These are startup-failure distinctions, not the entire outcome table. A queued live worker remains
 pending; detached launch returns 9. An owned Sandbox whose termination cannot be verified returns

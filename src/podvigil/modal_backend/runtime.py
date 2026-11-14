@@ -193,6 +193,8 @@ def manifest(root, job_id, owner, outcome, returncode):
 def runtime_window(job, wall_now, monotonic_now):
     if "startup_deadline" in job and wall_now >= job["startup_deadline"]:
         return None
+    if job.get("start_protocol") == 1 and wall_now >= job["deadline"]:
+        return None
     return monotonic_now + max(
         0, min(job["deadline"] - wall_now, job["config"].get("timeout_seconds", 86400))
     )

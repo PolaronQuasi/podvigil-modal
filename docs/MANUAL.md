@@ -72,6 +72,10 @@ overall deadline is fixed at launch to the sum of both allowances. Early startup
 startup time to the run budget. Supervisor initialization and its start-gate commit consume part of
 the run allowance. Omit the new field to retain the legacy overall allowance.
 
+New jobs use the start protocol in either mode: if the supervisor enters after its start deadline
+(the overall deadline when no startup field is supplied), it exits before writing to the Volume.
+Recovery still requires terminal observations and a verified inputs-only backup for `no_capacity`.
+
 If status shows `runtime_start_error`, the worker could not read the start marker. It keeps
 monitoring within the existing deadline instead of stopping healthy work on that failed read.
 Cancellation still works, and a confirmed missing marker after the startup allowance ends stops the
