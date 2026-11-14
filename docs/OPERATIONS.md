@@ -264,6 +264,10 @@ device and peak per-device memory in MiB. Missing samples produce null measureme
 best effort every five seconds with a one-second command timeout; it is not continuous monitoring.
 `actual_gpu` contains sampled device model names, not GPU identifiers or an inferred reservation.
 
+Cold-driver discovery can take up to ten seconds before workload launch, bounded by the start and
+run windows with a launch margin. Later sampling retains a one-second timeout; an unavailable
+initial sample may leave `PODVIGIL_GPU` as `unknown` without failing the job.
+
 `cost_estimate.sandbox_runtime_seconds` currently measures supervisor entry through manifest
 preparation, excluding container boot and the final Volume commit. The field name does not imply
 provider billing precision. `estimated_spend_usd` multiplies that measured interval by the user's

@@ -2,7 +2,7 @@
 
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import json
 import subprocess
 import tempfile
@@ -11,6 +11,45 @@ from podvigil.modal_backend import runtime
 
 
 class GpuMetrics(unittest.TestCase):
+    def test_initial_sample_reserves_start_margin_and_skips_when_too_late(self):
+        for startup, finish_by, expected in (
+            (None, 150, 10),
+            (205, 150, 4.75),
+            (220, 103, 2.75),
+            (200.3, 150, None),
+            (199, 150, None),
+            (220, 100.2, None),
+        ):
+            with (
+                self.subTest(startup=startup, finish_by=finish_by),
+                patch.object(runtime.time, "time", return_value=200),
+                patch.object(runtime.time, "monotonic", return_value=100),
+            ):
+                record = {"deadline": 230}
+                if startup is not None:
+                    record["startup_deadline"] = startup
+                monitor = Mock()
+                runtime.initial_gpu_sample(monitor, record, finish_by)
+                if expected is None:
+                    monitor.sample.assert_not_called()
+                else:
+                    monitor.sample.assert_called_once_with(timeout=expected)
+
+    def test_long_first_sample_does_not_change_later_one_second_timeout(self):
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            patch.object(runtime.shutil, "which", return_value="nvidia-smi"),
+            patch.object(
+                runtime.subprocess, "run", return_value=SimpleNamespace(stdout="Tesla L4, 10, 50\n")
+            ) as run,
+        ):
+            monitor = runtime.GpuMonitor(Path(directory))
+            with patch.object(runtime.time, "monotonic", return_value=10):
+                monitor.sample(timeout=10)
+            with patch.object(runtime.time, "monotonic", return_value=20):
+                monitor.sample()
+            self.assertEqual([call.kwargs["timeout"] for call in run.call_args_list], [10, 1])
+
     def test_device_observations_are_aggregated_and_written(self):
         with (
             tempfile.TemporaryDirectory() as directory,

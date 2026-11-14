@@ -14,7 +14,9 @@ from podvigil.modal_backend import runtime
 
 @unittest.skipUnless(sys.platform.startswith("linux"), "Sandbox runtime requires Linux")
 class ModalRuntime(unittest.TestCase):
-    def invoke(self, code, seconds=15, *, periodic_failure=False, config=None, fake_gpu=False):
+    def invoke(
+        self, code, seconds=15, *, periodic_failure=False, config=None, fake_gpu=False, gpu_delay=0
+    ):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)
         folder = Path(temp.name)
@@ -53,7 +55,9 @@ class ModalRuntime(unittest.TestCase):
             binary = folder / "bin"
             binary.mkdir()
             executable = binary / "nvidia-smi"
-            executable.write_text("#!/bin/sh\nprintf '%s\\n' 'Fake T4, 40, 1024'\n")
+            executable.write_text(
+                "#!/bin/sh\nsleep " + str(gpu_delay) + "\nprintf '%s\\n' 'Fake T4, 40, 1024'\n"
+            )
             executable.chmod(0o700)
             environment["PATH"] = str(binary) + os.pathsep + environment.get("PATH", "")
         result = subprocess.run(
@@ -94,6 +98,18 @@ class ModalRuntime(unittest.TestCase):
         self.assertEqual(record["gpu_metrics"]["gpu_names"], ["Fake T4"])
         self.assertIn("outputs/.podvigil/gpu-samples.jsonl", record["files"])
         self.assertGreater(record["timing"]["supervisor_seconds"], 0)
+
+    def test_slow_cold_gpu_discovery_reaches_the_workload(self):
+        _, result, record = self.invoke(
+            "import os,pathlib\n"
+            "assert os.environ['PODVIGIL_GPU']=='Fake T4'\n"
+            "pathlib.Path(os.environ['PODVIGIL_OUTPUT_DIR'],'result.txt').write_text('ok')\n",
+            fake_gpu=True,
+            gpu_delay=3,
+            config={"gpu": "T4"},
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(record["gpu_metrics"]["gpu_names"], ["Fake T4"])
 
     def test_failure_and_missing_artifact(self):
         for code, expected in (

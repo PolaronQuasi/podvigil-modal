@@ -36,7 +36,7 @@ class GpuMonitor:
             self.errors += 1
             self.path = None
 
-    def sample(self):
+    def sample(self, *, timeout=1):
         if not self.executable or time.monotonic() < self.next_sample:
             return
         self.next_sample = time.monotonic() + 5
@@ -50,7 +50,7 @@ class GpuMonitor:
                 capture_output=True,
                 text=True,
                 check=True,
-                timeout=1,
+                timeout=timeout,
             )
             devices = []
             for line in result.stdout.splitlines()[:8]:
@@ -200,6 +200,17 @@ def runtime_window(job, wall_now, monotonic_now):
     )
 
 
+def initial_gpu_sample(monitor, job, finish_by):
+    # Reserve launch overhead and keep discovery inside both startup and useful run time.
+    allowance = min(
+        10,
+        job.get("startup_deadline", job["deadline"]) - time.time() - 0.25,
+        finish_by - time.monotonic() - 0.25,
+    )
+    if allowance >= 0.1:
+        monitor.sample(timeout=allowance)
+
+
 def run(path):
     entered = time.monotonic()
     if not sys.platform.startswith("linux"):
@@ -267,7 +278,7 @@ def run(path):
         PYTHONUNBUFFERED="1",
     )
     gpu_monitor = GpuMonitor(output)
-    gpu_monitor.sample()
+    initial_gpu_sample(gpu_monitor, job, finish_by)
     environment.update(
         PODVIGIL_GPU=",".join(sorted(gpu_monitor.names))
         or ("none" if not spec.get("gpu") else "unknown"),

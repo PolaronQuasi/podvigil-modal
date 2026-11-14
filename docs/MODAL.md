@@ -230,6 +230,11 @@ errors. Missing readings are null, not zero. Sampling failures never intentional
 ordinary output-backup integrity rules still apply. The GPU identity is recorded in final verified
 status; this is not a live GPU inventory command.
 
+The initial sample allows up to ten seconds for cold-driver startup, bounded by the remaining start
+deadline and useful run window minus a 0.25-second margin. It is skipped if less than 0.1 seconds
+remain after that margin. Subsequent samples keep a one-second timeout. The workload start check
+still refuses to launch after its deadline.
+
 `pricing.py` contains a sanity-check table dated **2026-11-14**, verified against
 [Modal pricing](https://modal.com/pricing). Sandbox CPU and memory use their published rates;
 Sandbox GPU pricing explicitly refers to standard GPU rates, without a three-times multiplier.
