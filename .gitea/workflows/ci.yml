@@ -1,0 +1,59 @@
+name: Modal CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.10', '3.12']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Dependency-free lifecycle and runtime
+        run: python -B tools/ci.py test
+      - name: Install pinned Modal SDK dependencies
+        run: python -m pip install -r requirements.lock.txt
+      - name: SDK contract and full offline suite
+        run: python -B tools/ci.py test
+
+  windows:
+    runs-on: windows
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare the test environment
+        shell: cmd
+        run:
+          python -m venv .venv && .venv\Scripts\python.exe -m pip install -r requirements.lock.txt
+      - name: Offline suite and real detached process checks
+        shell: cmd
+        run: .venv\Scripts\python.exe -B tools/ci.py test
+
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned quality tools
+        run: python -m pip install -r requirements-ci.txt
+      - name: Lint and formatting
+        run: |
+          python -m ruff check --select E9,F63,F7,F82 src tests tools examples
+          python tools/format_files.py --check --python-only
+      - name: Credentials, documentation and whitespace
+        run: |
+          python tools/ci.py audit
+          python tools/check_docs.py
+          python tools/check_workflows.py
+      - name: Build and validate packages
+        run: |
+          python -m build --no-isolation
+          python -m twine check --strict dist/*.whl dist/*.tar.gz
+          python -B tools/ci.py smoke

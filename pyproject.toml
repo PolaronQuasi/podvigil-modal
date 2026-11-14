@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+# The Modal distribution has a distinct executable; the Python import name stays stable.
+[project]
+name = "podvigil-modal"
+authors = [{ name = "Darius-Nicolae Litescu" }]
+dynamic = ["version"]
+description = "Modal Sandbox job runner with bounded compute, independent supervision and verified result recovery."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE", "DISCLAIMER.md"]
+dependencies = [
+  "modal==1.6.4",
+]
+
+[project.scripts]
+podvigil-modal = "podvigil.cli:run_cli"
+
+[tool.setuptools.dynamic]
+version = { attr = "podvigil.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[tool.setuptools.package-data]
+podvigil = ["_build_info.json"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+docstring-code-format = false

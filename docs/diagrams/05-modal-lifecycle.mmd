@@ -1,0 +1,28 @@
+flowchart TD
+    accTitle: PodVigil Modal managed lifecycle
+    accDescr: The local worker creates one owned Sandbox and Volume. Normal recovery verifies terminal compute twice, backs up every file, then deletes storage. Uncertainty retains resources for explicit recovery. No-workload cleanup requires recorded proof, not a timeout alone.
+
+    A["Validate inputs, limits and estimate<br/>Arm worker; match local credentials"] --> B["Build image; record create intents<br/>Create owned Volume and Sandbox"]
+    B --> C["Commit runtime start gate<br/>Before any workload execution"]
+    C --> D["Run with fixed time limits<br/>Checkpoint, stop children, publish manifest"]
+    D --> E["Verify compute stopped<br/>Owned receipt and two terminal reads"]
+    C -. "no workload start" .-> E
+    E --> F{"Complete and consistent<br/>output manifest?"}
+    F -->|yes| G["Back up every file<br/>Check manifest bytes, hashes and second reads"]
+    F -->|no| H{"Recorded no-start protocol<br/>No gate; exact uploaded inventory?"}
+    H -->|yes| I["Back up inputs; verify upload hashes<br/>Eligible for no_capacity after cleanup"]
+    G --> J["Flush files and POSIX directories<br/>Save durable backup receipt"]
+    I --> J
+    J --> K["Delete Volume by receipted ID<br/>Confirm absence twice; record result"]
+    K --> L["Keep verified local backup<br/>Storage billing can lag deletion"]
+
+    A -. "worker records" .-> O[("Local ledger only<br/>Offline status, wait, list and logs")]
+    B -. "create unresolved" .-> M["Preserve receipts and resources<br/>No create retry; explicit recovery"]
+    E -. "stop unverified" .-> M
+    H -->|no| N["Storage cleanup unverified<br/>Keep ledger for explicit recovery"]
+    G -. "verification fails" .-> N
+    J -. "durability fails" .-> N
+    K -. "absence unverified" .-> N
+
+    classDef retained fill:#fff5dc,stroke:#b58a25,color:#483a18
+    class M,N retained

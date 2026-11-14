@@ -1,0 +1,1928 @@
+<svg
+  id="my-svg"
+  width="1430.258056640625"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  class="flowchart"
+  height="2047.18310546875"
+  viewBox="-16 -16 1430.258056640625 2047.18310546875"
+  role="graphics-document document"
+  aria-roledescription="flowchart-v2"
+  aria-describedby="chart-desc-my-svg"
+  aria-labelledby="chart-title-my-svg"
+  style="background-color: white;"
+>
+  <title id="chart-title-my-svg">PodVigil Modal managed lifecycle</title>
+  <desc
+    id="chart-desc-my-svg"
+  >The local worker creates one owned Sandbox and Volume. Normal recovery verifies terminal compute twice, backs up every file, then deletes storage. Uncertainty retains resources for explicit recovery. No-workload cleanup requires recorded proof, not a timeout alone.</desc>
+  <style>
+#my-svg {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  fill: #142b49;
+}
+@keyframes edge-animation-frame {
+  from {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+#my-svg .edge-animation-slow {
+  stroke-dasharray: 9, 5 !important;
+  stroke-dashoffset: 900;
+  animation: dash 50s linear infinite;
+  stroke-linecap: round;
+}
+#my-svg .edge-animation-fast {
+  stroke-dasharray: 9, 5 !important;
+  stroke-dashoffset: 900;
+  animation: dash 20s linear infinite;
+  stroke-linecap: round;
+}
+#my-svg .error-icon {
+  fill: #f5f7fb;
+}
+#my-svg .error-text {
+  fill: #0a0804;
+  stroke: #0a0804;
+}
+#my-svg .edge-thickness-normal {
+  stroke-width: 1px;
+}
+#my-svg .edge-thickness-thick {
+  stroke-width: 3.5px;
+}
+#my-svg .edge-pattern-solid {
+  stroke-dasharray: 0;
+}
+#my-svg .edge-thickness-invisible {
+  stroke-width: 0;
+  fill: none;
+}
+#my-svg .edge-pattern-dashed {
+  stroke-dasharray: 3;
+}
+#my-svg .edge-pattern-dotted {
+  stroke-dasharray: 2;
+}
+#my-svg .marker {
+  fill: #52647c;
+  stroke: #52647c;
+}
+#my-svg .marker.cross {
+  stroke: #52647c;
+}
+#my-svg svg {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+#my-svg p {
+  margin: 0;
+}
+#my-svg .label {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #142b49;
+}
+#my-svg .cluster-label text {
+  fill: #142b49;
+}
+#my-svg .cluster-label span {
+  color: #142b49;
+}
+#my-svg .cluster-label span p {
+  background-color: transparent;
+}
+#my-svg .label text,
+#my-svg span {
+  fill: #142b49;
+  color: #142b49;
+}
+#my-svg .node rect,
+#my-svg .node circle,
+#my-svg .node ellipse,
+#my-svg .node polygon,
+#my-svg .node path {
+  fill: #eaf2ff;
+  stroke: #3864a2;
+  stroke-width: 1px;
+}
+#my-svg .rough-node .label text,
+#my-svg .node .label text,
+#my-svg .image-shape .label,
+#my-svg .icon-shape .label {
+  text-anchor: middle;
+}
+#my-svg .node .katex path {
+  fill: #000;
+  stroke: #000;
+  stroke-width: 1px;
+}
+#my-svg .rough-node .label,
+#my-svg .node .label,
+#my-svg .image-shape .label,
+#my-svg .icon-shape .label {
+  text-align: center;
+}
+#my-svg .node.clickable {
+  cursor: pointer;
+}
+#my-svg .root .anchor path {
+  fill: #52647c !important;
+  stroke-width: 0;
+  stroke: #52647c;
+}
+#my-svg .arrowheadPath {
+  fill: #0b0b0b;
+}
+#my-svg .edgePaths .path {
+  stroke: #52647c;
+  stroke-width: 1px;
+}
+#my-svg .flowchart-link {
+  stroke: #52647c;
+  fill: none;
+}
+#my-svg .edgeLabel {
+  background-color: #ffffff;
+  text-align: center;
+}
+#my-svg .edgeLabel p {
+  background-color: #ffffff;
+}
+#my-svg .edgeLabel rect {
+  opacity: 0.5;
+  background-color: #ffffff;
+  fill: #ffffff;
+}
+#my-svg .labelBkg {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+#my-svg .cluster rect {
+  fill: #f7f9fc;
+  stroke: #b8c5d6;
+  stroke-width: 1px;
+}
+#my-svg .cluster text {
+  fill: #142b49;
+}
+#my-svg .cluster span {
+  color: #142b49;
+}
+#my-svg .node .collapsed-indicator {
+  fill: #b8c5d6;
+  stroke: none;
+  opacity: 0.6;
+}
+#my-svg .node .collapsed-separator {
+  stroke: #b8c5d6;
+  stroke-width: 0.75px;
+}
+#my-svg div.mermaidTooltip {
+  position: absolute;
+  text-align: center;
+  max-width: 200px;
+  padding: 2px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background: #f5f7fb;
+  border: 1px solid hsl(220, 2.8571428571%, 87.2549019608%);
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 100;
+}
+#my-svg .flowchartTitleText {
+  text-anchor: middle;
+  font-size: 18px;
+  fill: #142b49;
+}
+#my-svg rect.text {
+  fill: none;
+  stroke-width: 0;
+}
+#my-svg .icon-shape,
+#my-svg .image-shape {
+  background-color: #ffffff;
+  text-align: center;
+}
+#my-svg .icon-shape p,
+#my-svg .image-shape p {
+  background-color: #ffffff;
+  padding: 2px;
+}
+#my-svg .icon-shape .label rect,
+#my-svg .image-shape .label rect {
+  opacity: 0.5;
+  background-color: #ffffff;
+  fill: #ffffff;
+}
+#my-svg .label-icon {
+  display: inline-block;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+#my-svg .node .label-icon path {
+  fill: currentColor;
+  stroke: revert;
+  stroke-width: revert;
+}
+#my-svg .node .neo-node {
+  stroke: #3864a2;
+}
+#my-svg [data-look='neo'].node rect,
+#my-svg [data-look='neo'].cluster rect,
+#my-svg [data-look='neo'].node polygon {
+  stroke: url(#my-svg-gradient);
+  filter: drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));
+}
+#my-svg [data-look='neo'].swimlane.cluster rect {
+  filter: none;
+}
+#my-svg [data-look='neo'].node path {
+  stroke: url(#my-svg-gradient);
+  stroke-width: 1px;
+}
+#my-svg [data-look='neo'].node .outer-path {
+  filter: drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));
+}
+#my-svg [data-look='neo'].node .neo-line path {
+  stroke: #3864a2;
+  filter: none;
+}
+#my-svg [data-look='neo'].node circle {
+  stroke: url(#my-svg-gradient);
+  filter: drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));
+}
+#my-svg [data-look='neo'].node circle .state-start {
+  fill: #000000;
+}
+#my-svg [data-look='neo'].icon-shape .icon {
+  fill: url(#my-svg-gradient);
+  filter: drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));
+}
+#my-svg [data-look='neo'].icon-shape .icon-neo path {
+  stroke: url(#my-svg-gradient);
+  filter: drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));
+}
+#my-svg .edgeLabel rect {
+  opacity: 1 !important;
+}
+#my-svg :root {
+  --mermaid-font-family: 'trebuchet ms', verdana, arial, sans-serif;
+}
+#my-svg .retained rect {
+  fill: rgb(255, 245, 220) !important;
+  stroke: rgb(181, 138, 37) !important;
+  color: rgb(72, 58, 24) !important;
+}
+#my-svg .retained polygon {
+  fill: rgb(255, 245, 220) !important;
+  stroke: rgb(181, 138, 37) !important;
+  color: rgb(72, 58, 24) !important;
+}
+#my-svg .retained ellipse {
+  fill: rgb(255, 245, 220) !important;
+  stroke: rgb(181, 138, 37) !important;
+  color: rgb(72, 58, 24) !important;
+}
+#my-svg .retained circle {
+  fill: rgb(255, 245, 220) !important;
+  stroke: rgb(181, 138, 37) !important;
+  color: rgb(72, 58, 24) !important;
+}
+#my-svg .retained path {
+  fill: rgb(255, 245, 220) !important;
+  stroke: rgb(181, 138, 37) !important;
+  color: rgb(72, 58, 24) !important;
+}
+#my-svg .retained tspan {
+  fill: rgb(72, 58, 24) !important;
+}
+</style>
+  <g>
+    <marker
+      id="my-svg_flowchart-v2-pointEnd"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refX="5"
+      refY="5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="8"
+      markerHeight="8"
+      orient="auto"
+    >
+      <path
+        d="M 0 0 L 10 5 L 0 10 z"
+        class="arrowMarkerPath"
+        style="stroke-width: 1; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-pointStart"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refX="4.5"
+      refY="5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="8"
+      markerHeight="8"
+      orient="auto"
+    >
+      <path
+        d="M 0 5 L 10 10 L 10 0 z"
+        class="arrowMarkerPath"
+        style="stroke-width: 1; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-pointEnd-margin"
+      class="marker flowchart-v2"
+      viewBox="0 0 11.5 14"
+      refX="11.5"
+      refY="7"
+      markerUnits="userSpaceOnUse"
+      markerWidth="10.5"
+      markerHeight="14"
+      orient="auto"
+    >
+      <path
+        d="M 0 0 L 11.5 7 L 0 14 z"
+        class="arrowMarkerPath"
+        style="stroke-width: 0; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-pointStart-margin"
+      class="marker flowchart-v2"
+      viewBox="0 0 11.5 14"
+      refX="1"
+      refY="7"
+      markerUnits="userSpaceOnUse"
+      markerWidth="11.5"
+      markerHeight="14"
+      orient="auto"
+    >
+      <polygon
+        points="0,7 11.5,14 11.5,0"
+        class="arrowMarkerPath"
+        style="stroke-width: 0; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-circleEnd"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refX="11"
+      refY="5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="11"
+      markerHeight="11"
+      orient="auto"
+    >
+      <circle
+        cx="5"
+        cy="5"
+        r="5"
+        class="arrowMarkerPath"
+        style="stroke-width: 1; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-circleStart"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refX="-1"
+      refY="5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="11"
+      markerHeight="11"
+      orient="auto"
+    >
+      <circle
+        cx="5"
+        cy="5"
+        r="5"
+        class="arrowMarkerPath"
+        style="stroke-width: 1; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-circleEnd-margin"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refY="5"
+      refX="12.25"
+      markerUnits="userSpaceOnUse"
+      markerWidth="14"
+      markerHeight="14"
+      orient="auto"
+    >
+      <circle
+        cx="5"
+        cy="5"
+        r="5"
+        class="arrowMarkerPath"
+        style="stroke-width: 0; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-circleStart-margin"
+      class="marker flowchart-v2"
+      viewBox="0 0 10 10"
+      refX="-2"
+      refY="5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="14"
+      markerHeight="14"
+      orient="auto"
+    >
+      <circle
+        cx="5"
+        cy="5"
+        r="5"
+        class="arrowMarkerPath"
+        style="stroke-width: 0; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-crossEnd"
+      class="marker cross flowchart-v2"
+      viewBox="0 0 11 11"
+      refX="12"
+      refY="5.2"
+      markerUnits="userSpaceOnUse"
+      markerWidth="11"
+      markerHeight="11"
+      orient="auto"
+    >
+      <path
+        d="M 1,1 l 9,9 M 10,1 l -9,9"
+        class="arrowMarkerPath"
+        style="stroke-width: 2; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-crossStart"
+      class="marker cross flowchart-v2"
+      viewBox="0 0 11 11"
+      refX="-1"
+      refY="5.2"
+      markerUnits="userSpaceOnUse"
+      markerWidth="11"
+      markerHeight="11"
+      orient="auto"
+    >
+      <path
+        d="M 1,1 l 9,9 M 10,1 l -9,9"
+        class="arrowMarkerPath"
+        style="stroke-width: 2; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-crossEnd-margin"
+      class="marker cross flowchart-v2"
+      viewBox="0 0 15 15"
+      refX="17.7"
+      refY="7.5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="12"
+      markerHeight="12"
+      orient="auto"
+    >
+      <path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;" />
+    </marker>
+    <marker
+      id="my-svg_flowchart-v2-crossStart-margin"
+      class="marker cross flowchart-v2"
+      viewBox="0 0 15 15"
+      refX="-3.5"
+      refY="7.5"
+      markerUnits="userSpaceOnUse"
+      markerWidth="12"
+      markerHeight="12"
+      orient="auto"
+    >
+      <path
+        d="M 1,1 L 14,14 M 1,14 L 14,1"
+        class="arrowMarkerPath"
+        style="stroke-width: 2.5; stroke-dasharray: 1, 0;"
+      />
+    </marker>
+    <g class="root">
+      <g class="clusters" />
+      <g class="edges edgePaths">
+        <path
+          d="M848.6055882771809,75.80000305175781L848.6055882771809,88.72893523989234Q848.6055882771809,95.80000305175781 841.5345204653154,95.80000305175781L773.8086547869632,95.80000305175781Q766.7375869750977,95.80000305175781 766.7375869750977,102.87107086362329L766.7375869750977,111.80000305175781"
+          id="my-svg-L_A_B_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 108.53964233398438 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_A_B_0"
+          data-points="W3sieCI6ODQ4LjYwNTU4ODI3NzE4MDksInkiOjc1LjgwMDAwMzA1MTc1NzgxfSx7IngiOjg0OC42MDU1ODgyNzcxODA5LCJ5Ijo5NS44MDAwMDMwNTE3NTc4MX0seyJ4Ijo3NjYuNzM3NTg2OTc1MDk3NywieSI6OTUuODAwMDAzMDUxNzU3ODF9LHsieCI6NzY2LjczNzU4Njk3NTA5NzcsInkiOjExNS44MDAwMDMwNTE3NTc4MX1d"
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M716.5321833292643,179.60000610351562L716.5321833292643,192.52893829165015Q716.5321833292643,199.60000610351562 709.4611155173989,199.60000610351562L670.0005493182132,199.60000610351562Q662.9294815063477,199.60000610351562 662.9294815063477,206.6710739153811L662.9294815063477,250.00728861490884"
+          id="my-svg-L_B_C_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 114.68162536621094 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_B_C_0"
+          data-points="W3sieCI6NzE2LjUzMjE4MzMyOTI2NDMsInkiOjE3OS42MDAwMDYxMDM1MTU2Mn0seyJ4Ijo3MTYuNTMyMTgzMzI5MjY0MywieSI6MTk5LjYwMDAwNjEwMzUxNTYyfSx7IngiOjY2Mi45Mjk0ODE1MDYzNDc3LCJ5IjoxOTkuNjAwMDA2MTAzNTE1NjJ9LHsieCI6NjYyLjkyOTQ4MTUwNjM0NzcsInkiOjI1NC4wMDcyODg2MTQ5MDg4NH1d"
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M619.8982315063477,317.80729166666663L619.8982315063477,347.9398651104978Q619.8982315063477,355.0109329223633 612.8271636944821,355.0109329223633L520.4468383807132,355.0109329223633Q513.3757705688477,355.0109329223633 513.3757705688477,362.08200073422876L513.3757705688477,371.0109329223633"
+          id="my-svg-L_C_D_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 150.39781188964844 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_C_D_0"
+          data-points="W3sieCI6NjE5Ljg5ODIzMTUwNjM0NzcsInkiOjMxNy44MDcyOTE2NjY2NjY2M30seyJ4Ijo2MTkuODk4MjMxNTA2MzQ3NywieSI6MzU1LjAxMDkzMjkyMjM2MzN9LHsieCI6NTEzLjM3NTc3MDU2ODg0NzcsInkiOjM1NS4wMTA5MzI5MjIzNjMzfSx7IngiOjUxMy4zNzU3NzA1Njg4NDc3LCJ5IjozNzUuMDEwOTMyOTIyMzYzM31d"
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M513.3757705688477,438.8109359741211L513.3757705688477,451.7398681622556Q513.3757705688477,458.8109359741211 520.4468383807132,458.8109359741211L603.3245595278154,458.8109359741211Q610.3956273396809,458.8109359741211 610.3956273396809,465.88200378598657L610.3956273396809,474.8109359741211"
+          id="my-svg-L_D_E_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 123.69154357910156 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_D_E_0"
+          data-points="W3sieCI6NTEzLjM3NTc3MDU2ODg0NzcsInkiOjQzOC44MTA5MzU5NzQxMjExfSx7IngiOjUxMy4zNzU3NzA1Njg4NDc3LCJ5Ijo0NTguODEwOTM1OTc0MTIxMX0seyJ4Ijo2MTAuMzk1NjI3MzM5NjgwOSwieSI6NDU4LjgxMDkzNTk3NDEyMTF9LHsieCI6NjEwLjM5NTYyNzMzOTY4MDksInkiOjQ3OC44MTA5MzU5NzQxMjExfV0="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M705.9607315063477,317.80729166666663L705.9607315063477,347.9398651104978Q705.9607315063477,355.0109329223633 713.0317993182132,355.0109329223633L805.4121246319821,355.0109329223633Q812.4831924438477,355.0109329223633 812.4831924438477,362.08200073422876L812.4831924438477,451.7398681622556Q812.4831924438477,458.8109359741211 805.4121246319821,458.8109359741211L722.5344034848799,458.8109359741211Q715.4633356730144,458.8109359741211 715.4633356730144,465.88200378598657L715.4633356730144,474.8109359741211"
+          id="my-svg-L_C_E_0"
+          class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_C_E_0"
+          data-points="W3sieCI6NzA1Ljk2MDczMTUwNjM0NzcsInkiOjMxNy44MDcyOTE2NjY2NjY2M30seyJ4Ijo3MDUuOTYwNzMxNTA2MzQ3NywieSI6MzU1LjAxMDkzMjkyMjM2MzN9LHsieCI6ODEyLjQ4MzE5MjQ0Mzg0NzcsInkiOjM1NS4wMTA5MzI5MjIzNjMzfSx7IngiOjgxMi40ODMxOTI0NDM4NDc3LCJ5Ijo0NTguODEwOTM1OTc0MTIxMX0seyJ4Ijo3MTUuNDYzMzM1NjczMDE0NCwieSI6NDU4LjgxMDkzNTk3NDEyMTF9LHsieCI6NzE1LjQ2MzMzNTY3MzAxNDQsInkiOjQ3OC44MTA5MzU5NzQxMjExfV0="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M610.3956273396809,542.6109390258789L610.3956273396809,555.5398712140134Q610.3956273396809,562.6109390258789 603.3245595278154,562.6109390258789L550.7661209124515,562.6109390258789Q543.6950531005859,562.6109390258789 543.6950531005859,569.6820068377444L543.6950531005859,578.6109390258789"
+          id="my-svg-L_E_F_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 93.37225341796875 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_E_F_0"
+          data-points="W3sieCI6NjEwLjM5NTYyNzMzOTY4MDksInkiOjU0Mi42MTA5MzkwMjU4Nzg5fSx7IngiOjYxMC4zOTU2MjczMzk2ODA5LCJ5Ijo1NjIuNjEwOTM5MDI1ODc4OX0seyJ4Ijo1NDMuNjk1MDUzMTAwNTg1OSwieSI6NTYyLjYxMDkzOTAyNTg3ODl9LHsieCI6NTQzLjY5NTA1MzEwMDU4NTksInkiOjU4Mi42MTA5MzkwMjU4Nzg5fV0="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M501.20543416341144,815.0589747499325L501.20543416341144,857.5486526489258L501.20543416341144,870.4775848370602Q501.20543416341144,877.5486526489258 494.13436635154596,877.5486526489258L204.18825531186548,877.5486526489258Q197.1171875,877.5486526489258 197.1171875,884.6197204607913L197.1171875,929.4486541748047L197.1171875,1412.3830184936523L197.1171875,1460.3830184936523"
+          id="my-svg-L_F_G_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 940.0841064453125 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_F_G_0"
+          data-points="W3sieCI6NTAxLjIwNTQzNDE2MzQxMTQ0LCJ5Ijo4MTUuMDU4OTc0NzQ5OTMyNX0seyJ4Ijo1MDEuMjA1NDM0MTYzNDExNDQsInkiOjg1Ny41NDg2NTI2NDg5MjU4fSx7IngiOjUwMS4yMDU0MzQxNjM0MTE0NCwieSI6ODc3LjU0ODY1MjY0ODkyNTh9LHsieCI6MTk3LjExNzE4NzUsInkiOjg3Ny41NDg2NTI2NDg5MjU4fSx7IngiOjE5Ny4xMTcxODc1LCJ5Ijo5MjkuNDQ4NjU0MTc0ODA0N30seyJ4IjoxOTcuMTE3MTg3NSwieSI6MTQxMi4zODMwMTg0OTM2NTIzfSx7IngiOjE5Ny4xMTcxODc1LCJ5IjoxNDY0LjM4MzAxODQ5MzY1MjN9XQ=="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M586.1846720377604,815.0589747499325L586.1846720377604,857.5486526489258L586.1846720377604,870.4775848370602Q586.1846720377604,877.5486526489258 593.2557398496258,877.5486526489258L758.994036354801,877.5486526489258Q766.0651041666665,877.5486526489258 766.0651041666665,884.6197204607913L766.0651041666665,997.3486557006836"
+          id="my-svg-L_F_H_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 352.8418273925781 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_F_H_0"
+          data-points="W3sieCI6NTg2LjE4NDY3MjAzNzc2MDQsInkiOjgxNS4wNTg5NzQ3NDk5MzI1fSx7IngiOjU4Ni4xODQ2NzIwMzc3NjA0LCJ5Ijo4NTcuNTQ4NjUyNjQ4OTI1OH0seyJ4Ijo1ODYuMTg0NjcyMDM3NzYwNCwieSI6ODc3LjU0ODY1MjY0ODkyNTh9LHsieCI6NzY2LjA2NTEwNDE2NjY2NjUsInkiOjg3Ny41NDg2NTI2NDg5MjU4fSx7IngiOjc2Ni4wNjUxMDQxNjY2NjY1LCJ5IjoxMDAxLjM0ODY1NTcwMDY4MzZ9XQ=="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M709.5593770345051,1303.8771259088535L709.5593770345051,1360.3830184936523L709.5593770345051,1373.3119506817868Q709.5593770345051,1380.3830184936523 702.4883092226396,1380.3830184936523L681.577578228532,1380.3830184936523Q674.5065104166666,1380.3830184936523 674.5065104166666,1387.4540863055179L674.5065104166666,1470.283016204834"
+          id="my-svg-L_H_I_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 192.1304931640625 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_H_I_0"
+          data-points="W3sieCI6NzA5LjU1OTM3NzAzNDUwNTEsInkiOjEzMDMuODc3MTI1OTA4ODUzNX0seyJ4Ijo3MDkuNTU5Mzc3MDM0NTA1MSwieSI6MTM2MC4zODMwMTg0OTM2NTIzfSx7IngiOjcwOS41NTkzNzcwMzQ1MDUxLCJ5IjoxMzgwLjM4MzAxODQ5MzY1MjN9LHsieCI6Njc0LjUwNjUxMDQxNjY2NjYsInkiOjEzODAuMzgzMDE4NDkzNjUyM30seyJ4Ijo2NzQuNTA2NTEwNDE2NjY2NiwieSI6MTQ3NC4yODMwMTYyMDQ4MzR9XQ=="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M255.48958333333334,1547.9830169677734L255.48958333333334,1560.911949155908Q255.48958333333334,1567.9830169677734 262.5606511451988,1567.9830169677734L575.3885676048012,1567.9830169677734Q582.4596354166666,1567.9830169677734 582.4596354166666,1575.054084779639L582.4596354166666,1583.9830169677734"
+          id="my-svg-L_G_J_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 353.641845703125 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_G_J_0"
+          data-points="W3sieCI6MjU1LjQ4OTU4MzMzMzMzMzM0LCJ5IjoxNTQ3Ljk4MzAxNjk2Nzc3MzR9LHsieCI6MjU1LjQ4OTU4MzMzMzMzMzM0LCJ5IjoxNTY3Ljk4MzAxNjk2Nzc3MzR9LHsieCI6NTgyLjQ1OTYzNTQxNjY2NjYsInkiOjE1NjcuOTgzMDE2OTY3NzczNH0seyJ4Ijo1ODIuNDU5NjM1NDE2NjY2NiwieSI6MTU4Ny45ODMwMTY5Njc3NzM0fV0="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M674.5065104166666,1538.0830192565918L674.5065104166666,1583.9830169677734"
+          id="my-svg-L_I_J_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 41.9000244140625 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_I_J_0"
+          data-points="W3sieCI6Njc0LjUwNjUxMDQxNjY2NjYsInkiOjE1MzguMDgzMDE5MjU2NTkxOH0seyJ4Ijo2NzQuNTA2NTEwNDE2NjY2NiwieSI6MTU4Ny45ODMwMTY5Njc3NzM0fV0="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M582.4596354166666,1651.7830200195312L582.4596354166666,1664.7119522076657Q582.4596354166666,1671.7830200195312 575.3885676048012,1671.7830200195312L505.7689844785321,1671.7830200195312Q498.69791666666663,1671.7830200195312 498.69791666666663,1678.8540878313968L498.69791666666663,1687.7830200195312"
+          id="my-svg-L_J_K_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 110.43350982666016 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_J_K_0"
+          data-points="W3sieCI6NTgyLjQ1OTYzNTQxNjY2NjYsInkiOjE2NTEuNzgzMDIwMDE5NTMxMn0seyJ4Ijo1ODIuNDU5NjM1NDE2NjY2NiwieSI6MTY3MS43ODMwMjAwMTk1MzEyfSx7IngiOjQ5OC42OTc5MTY2NjY2NjY2MywieSI6MTY3MS43ODMwMjAwMTk1MzEyfSx7IngiOjQ5OC42OTc5MTY2NjY2NjY2MywieSI6MTY5MS43ODMwMjAwMTk1MzEyfV0="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M447.8411458333333,1755.583023071289L447.8411458333333,1768.5119552594235Q447.8411458333333,1775.583023071289 440.77007802146784,1775.583023071289L377.4682032285322,1775.583023071289Q370.39713541666674,1775.583023071289 370.39713541666674,1782.6540908831546L370.39713541666674,1791.583023071289"
+          id="my-svg-L_K_L_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 104.11581420898438 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_K_L_0"
+          data-points="W3sieCI6NDQ3Ljg0MTE0NTgzMzMzMzMsInkiOjE3NTUuNTgzMDIzMDcxMjg5fSx7IngiOjQ0Ny44NDExNDU4MzMzMzMzLCJ5IjoxNzc1LjU4MzAyMzA3MTI4OX0seyJ4IjozNzAuMzk3MTM1NDE2NjY2NzQsInkiOjE3NzUuNTgzMDIzMDcxMjg5fSx7IngiOjM3MC4zOTcxMzU0MTY2NjY3NCwieSI6MTc5NS41ODMwMjMwNzEyODl9XQ=="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M947.9857966105142,75.80000305175781L947.9857966105142,88.72893523989234Q947.9857966105142,95.80000305175781 955.0568644223797,95.80000305175781L1241.2728805523923,95.80000305175781Q1248.3439483642578,95.80000305175781 1248.3439483642578,102.87107086362329L1248.3439483642578,215.60000610351562"
+          id="my-svg-L_A_O_0"
+          class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_A_O_0"
+          data-points="W3sieCI6OTQ3Ljk4NTc5NjYxMDUxNDIsInkiOjc1LjgwMDAwMzA1MTc1NzgxfSx7IngiOjk0Ny45ODU3OTY2MTA1MTQyLCJ5Ijo5NS44MDAwMDMwNTE3NTc4MX0seyJ4IjoxMjQ4LjM0Mzk0ODM2NDI1NzgsInkiOjk1LjgwMDAwMzA1MTc1NzgxfSx7IngiOjEyNDguMzQzOTQ4MzY0MjU3OCwieSI6MjE5LjYwMDAwNjEwMzUxNTYyfV0="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M816.9429906209309,179.60000610351562L816.9429906209309,192.52893829165015Q816.9429906209309,199.60000610351562 824.0140584327964,199.60000610351562L1060.5853805523923,199.60000610351562Q1067.6564483642578,199.60000610351562 1067.6564483642578,206.6710739153811L1067.6564483642578,277.30546951293945L1067.6564483642578,510.7109375L1067.6564483642578,720.0797958374023L1067.6564483642578,893.5486526489258"
+          id="my-svg-L_B_M_0"
+          class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_B_M_0"
+          data-points="W3sieCI6ODE2Ljk0Mjk5MDYyMDkzMDksInkiOjE3OS42MDAwMDYxMDM1MTU2Mn0seyJ4Ijo4MTYuOTQyOTkwNjIwOTMwOSwieSI6MTk5LjYwMDAwNjEwMzUxNTYyfSx7IngiOjEwNjcuNjU2NDQ4MzY0MjU3OCwieSI6MTk5LjYwMDAwNjEwMzUxNTYyfSx7IngiOjEwNjcuNjU2NDQ4MzY0MjU3OCwieSI6Mjc3LjMwNTQ2OTUxMjkzOTQ1fSx7IngiOjEwNjcuNjU2NDQ4MzY0MjU3OCwieSI6NTEwLjcxMDkzNzV9LHsieCI6MTA2Ny42NTY0NDgzNjQyNTc4LCJ5Ijo3MjAuMDc5Nzk1ODM3NDAyM30seyJ4IjoxMDY3LjY1NjQ0ODM2NDI1NzgsInkiOjg5Ny41NDg2NTI2NDg5MjU4fV0="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M715.4633356730144,542.6109390258789L715.4633356730144,555.5398712140134Q715.4633356730144,562.6109390258789 722.5344034848799,562.6109390258789L933.0210901878088,562.6109390258789Q940.0921579996743,562.6109390258789 940.0921579996743,569.6820068377444L940.0921579996743,870.4775848370602Q940.0921579996743,877.5486526489258 947.1632258115399,877.5486526489258L970.0417607607255,877.5486526489258Q977.1128285725911,877.5486526489258 977.1128285725911,884.6197204607913L977.1128285725911,893.5486526489258"
+          id="my-svg-L_E_M_0"
+          class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_E_M_0"
+          data-points="W3sieCI6NzE1LjQ2MzMzNTY3MzAxNDQsInkiOjU0Mi42MTA5MzkwMjU4Nzg5fSx7IngiOjcxNS40NjMzMzU2NzMwMTQ0LCJ5Ijo1NjIuNjEwOTM5MDI1ODc4OX0seyJ4Ijo5NDAuMDkyMTU3OTk5Njc0MywieSI6NTYyLjYxMDkzOTAyNTg3ODl9LHsieCI6OTQwLjA5MjE1Nzk5OTY3NDMsInkiOjg3Ny41NDg2NTI2NDg5MjU4fSx7IngiOjk3Ny4xMTI4Mjg1NzI1OTExLCJ5Ijo4NzcuNTQ4NjUyNjQ4OTI1OH0seyJ4Ijo5NzcuMTEyODI4NTcyNTkxMSwieSI6ODk3LjU0ODY1MjY0ODkyNTh9XQ=="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M822.5708312988281,1303.8771259088535L822.5708312988281,1360.3830184936523L822.5708312988281,1373.3119506817868Q822.5708312988281,1380.3830184936523 829.6418991106937,1380.3830184936523L902.4367446881345,1380.3830184936523Q909.5078125,1380.3830184936523 909.5078125,1387.4540863055179L909.5078125,1412.3830184936523L909.5078125,1506.183017730713L909.5078125,1723.6830215454102L909.5078125,1827.483024597168L909.5078125,1912.3119583111813Q909.5078125,1919.3830261230469 902.4367446881345,1919.3830261230469L673.9033543922692,1919.3830261230469Q666.8322865804037,1919.3830261230469 666.8322865804037,1926.4540939349124L666.8322865804037,1935.3830261230469"
+          id="my-svg-L_H_N_0"
+          class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 946.4620971679688 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_H_N_0"
+          data-points="W3sieCI6ODIyLjU3MDgzMTI5ODgyODEsInkiOjEzMDMuODc3MTI1OTA4ODUzNX0seyJ4Ijo4MjIuNTcwODMxMjk4ODI4MSwieSI6MTM2MC4zODMwMTg0OTM2NTIzfSx7IngiOjgyMi41NzA4MzEyOTg4MjgxLCJ5IjoxMzgwLjM4MzAxODQ5MzY1MjN9LHsieCI6OTA5LjUwNzgxMjUsInkiOjEzODAuMzgzMDE4NDkzNjUyM30seyJ4Ijo5MDkuNTA3ODEyNSwieSI6MTQxMi4zODMwMTg0OTM2NTIzfSx7IngiOjkwOS41MDc4MTI1LCJ5IjoxNTA2LjE4MzAxNzczMDcxM30seyJ4Ijo5MDkuNTA3ODEyNSwieSI6MTcyMy42ODMwMjE1NDU0MTAyfSx7IngiOjkwOS41MDc4MTI1LCJ5IjoxODI3LjQ4MzAyNDU5NzE2OH0seyJ4Ijo5MDkuNTA3ODEyNSwieSI6MTkxOS4zODMwMjYxMjMwNDY5fSx7IngiOjY2Ni44MzIyODY1ODA0MDM3LCJ5IjoxOTE5LjM4MzAyNjEyMzA0Njl9LHsieCI6NjY2LjgzMjI4NjU4MDQwMzcsInkiOjE5MzkuMzgzMDI2MTIzMDQ2OX1d"
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M138.74479166666669,1547.9830169677734L138.7447916666667,1619.8830184936523L138.7447916666667,1827.483024597168L138.7447916666667,1872.3119583111813Q138.7447916666667,1879.3830261230469 145.8158594785322,1879.3830261230469L497.66395314353815,1879.3830261230469Q504.7350209554036,1879.3830261230469 504.7350209554036,1886.4540939349124L504.7350209554036,1935.3830261230469"
+          id="my-svg-L_G_N_0"
+          class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_G_N_0"
+          data-points="W3sieCI6MTM4Ljc0NDc5MTY2NjY2NjY5LCJ5IjoxNTQ3Ljk4MzAxNjk2Nzc3MzR9LHsieCI6MTM4Ljc0NDc5MTY2NjY2NjcsInkiOjE2MTkuODgzMDE4NDkzNjUyM30seyJ4IjoxMzguNzQ0NzkxNjY2NjY2NywieSI6MTgyNy40ODMwMjQ1OTcxNjh9LHsieCI6MTM4Ljc0NDc5MTY2NjY2NjcsInkiOjE4NzkuMzgzMDI2MTIzMDQ2OX0seyJ4Ijo1MDQuNzM1MDIwOTU1NDAzNiwieSI6MTg3OS4zODMwMjYxMjMwNDY5fSx7IngiOjUwNC43MzUwMjA5NTU0MDM2LCJ5IjoxOTM5LjM4MzAyNjEyMzA0Njl9XQ=="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M674.5065104166666,1651.7830200195312L674.5065104166666,1664.7119522076657Q674.5065104166666,1671.7830200195312 681.577578228532,1671.7830200195312L772.8469009381345,1671.7830200195312Q779.91796875,1671.7830200195312 779.91796875,1678.8540878313968L779.91796875,1827.483024597168L779.91796875,1892.3119583111813Q779.91796875,1899.3830261230469 772.8469009381345,1899.3830261230469L619.870932517269,1899.3830261230469Q612.7998647054036,1899.3830261230469 612.7998647054036,1906.4540939349124L612.7998647054036,1935.3830261230469"
+          id="my-svg-L_J_N_0"
+          class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_J_N_0"
+          data-points="W3sieCI6Njc0LjUwNjUxMDQxNjY2NjYsInkiOjE2NTEuNzgzMDIwMDE5NTMxMn0seyJ4Ijo2NzQuNTA2NTEwNDE2NjY2NiwieSI6MTY3MS43ODMwMjAwMTk1MzEyfSx7IngiOjc3OS45MTc5Njg3NSwieSI6MTY3MS43ODMwMjAwMTk1MzEyfSx7IngiOjc3OS45MTc5Njg3NSwieSI6MTgyNy40ODMwMjQ1OTcxNjh9LHsieCI6Nzc5LjkxNzk2ODc1LCJ5IjoxODk5LjM4MzAyNjEyMzA0Njl9LHsieCI6NjEyLjc5OTg2NDcwNTQwMzYsInkiOjE4OTkuMzgzMDI2MTIzMDQ2OX0seyJ4Ijo2MTIuNzk5ODY0NzA1NDAzNiwieSI6MTkzOS4zODMwMjYxMjMwNDY5fV0="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+        <path
+          d="M549.5546875,1755.583023071289L549.5546875,1768.5119552594235Q549.5546875,1775.583023071289 556.6257553118655,1775.583023071289L619.9276301048012,1775.583023071289Q626.9986979166667,1775.583023071289 626.9986979166667,1782.6540908831546L626.9986979166667,1872.3119583111813Q626.9986979166667,1879.3830261230469 619.9276301048012,1879.3830261230469L565.8385106422691,1879.3830261230469Q558.7674428304035,1879.3830261230469 558.7674428304035,1886.4540939349124L558.7674428304035,1935.3830261230469"
+          id="my-svg-L_K_N_0"
+          class="edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link"
+          style="stroke-dasharray: 0 0 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 4; stroke-dashoffset: 0;;"
+          data-edge="true"
+          data-et="edge"
+          data-id="L_K_N_0"
+          data-points="W3sieCI6NTQ5LjU1NDY4NzUsInkiOjE3NTUuNTgzMDIzMDcxMjg5fSx7IngiOjU0OS41NTQ2ODc1LCJ5IjoxNzc1LjU4MzAyMzA3MTI4OX0seyJ4Ijo2MjYuOTk4Njk3OTE2NjY2NywieSI6MTc3NS41ODMwMjMwNzEyODl9LHsieCI6NjI2Ljk5ODY5NzkxNjY2NjcsInkiOjE4NzkuMzgzMDI2MTIzMDQ2OX0seyJ4Ijo1NTguNzY3NDQyODMwNDAzNSwieSI6MTg3OS4zODMwMjYxMjMwNDY5fSx7IngiOjU1OC43Njc0NDI4MzA0MDM1LCJ5IjoxOTM5LjM4MzAyNjEyMzA0Njl9XQ=="
+          data-look="neo"
+          marker-end="url(#my-svg_flowchart-v2-pointEnd-margin)"
+        />
+      </g>
+      <g class="edgeLabels">
+        <g class="edgeLabel" transform="translate(812.0256729125977, 406.9109344482422)">
+          <g
+            class="label"
+            data-id="L_C_E_0"
+            transform="translate(-0.49560546875, -12.000001907348633)"
+          >
+            <g><rect
+                class="background"
+                style=""
+                x="-70.546875"
+                y="0.0000019073486328125"
+                width="142.0849609375"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan font-style="normal" class="text-inner-tspan" font-weight="normal">no</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > workload</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > start</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(196.625, 1180.865837097168)">
+          <g class="label" data-id="L_F_G_0" transform="translate(0, -12.000001907348633)">
+            <g><rect
+                class="background"
+                style=""
+                x="-16.0078125"
+                y="0.0000019073486328125"
+                width="32.015625"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >yes</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(765.5807291666665, 929.4486541748047)">
+          <g class="label" data-id="L_F_H_0" transform="translate(0, -12.000001907348633)">
+            <g><rect
+                class="background"
+                style=""
+                x="-12.015625"
+                y="0.0000019073486328125"
+                width="24.03125"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >no</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(674.0143229166666, 1412.3830184936523)">
+          <g class="label" data-id="L_H_I_0" transform="translate(0, -12.000001907348633)">
+            <g><rect
+                class="background"
+                style=""
+                x="-16.0078125"
+                y="0.0000019073486328125"
+                width="32.015625"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >yes</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(1247.8673858642578, 147.70000457763672)">
+          <g class="label" data-id="L_A_O_0" transform="translate(0.5, -12.000001907348633)">
+            <g><rect
+                class="background"
+                style=""
+                x="-62.5234375"
+                y="0.0000019073486328125"
+                width="124.046875"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan font-style="normal" class="text-inner-tspan" font-weight="normal">worker</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > records</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(1067.6564483642578, 406.9109344482422)">
+          <g class="label" data-id="L_B_M_0" transform="translate(0, -12.000001907348633)">
+            <g><rect
+                class="background"
+                style=""
+                x="-73.546875"
+                y="0.0000019073486328125"
+                width="147.09375"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan font-style="normal" class="text-inner-tspan" font-weight="normal">create</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > unresolved</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(939.6390329996743, 720.0797958374023)">
+          <g class="label" data-id="L_E_M_0" transform="translate(0, -12.000001907348633)">
+            <g><rect
+                class="background"
+                style=""
+                x="-60.546875"
+                y="0.0000019073486328125"
+                width="121.09375"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan font-style="normal" class="text-inner-tspan" font-weight="normal">stop</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > unverified</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(909.0234375, 1619.8830184936523)">
+          <g class="label" data-id="L_H_N_0" transform="translate(0, -12.000001907348633)">
+            <g><rect
+                class="background"
+                style=""
+                x="-12.015625"
+                y="0.0000019073486328125"
+                width="24.03125"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >no</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(138.2760416666667, 1723.6830215454102)">
+          <g class="label" data-id="L_G_N_0" transform="translate(0.5, -12.000001907348633)">
+            <g><rect
+                class="background"
+                style=""
+                x="-64.53125"
+                y="0.0000019073486328125"
+                width="128.0625"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >verification</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > fails</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(779.44921875, 1723.6830215454102)">
+          <g class="label" data-id="L_J_N_0" transform="translate(0, -12.000001907348633)">
+            <g><rect
+                class="background"
+                style=""
+                x="-56.53125"
+                y="0.0000019073486328125"
+                width="113.0625"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan font-style="normal" class="text-inner-tspan" font-weight="normal">durability</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > fails</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g class="edgeLabel" transform="translate(626.5611979166667, 1827.483024597168)">
+          <g class="label" data-id="L_K_N_0" transform="translate(0, -12.000001907348633)">
+            <g><rect
+                class="background"
+                style=""
+                x="-77.5625"
+                y="0.0000019073486328125"
+                width="155.125"
+                height="24"
+              /><!-- prettier-ignore-start -->
+<text y="-10.1" text-anchor="middle" style=""><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+    text-anchor="middle"
+  ><tspan font-style="normal" class="text-inner-tspan" font-weight="normal">absence</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > unverified</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+      </g>
+      <g class="nodes">
+        <g
+          class="node default"
+          id="my-svg-flowchart-A-0"
+          data-look="neo"
+          transform="translate(898.2956924438477, 43.900001525878906)"
+        >
+          <rect
+            class="basic label-container"
+            style=""
+            x="-159.0703125"
+            y="-31.900001525878906"
+            width="318.140625"
+            height="63.80000305175781"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Validate</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > inputs,</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > limits</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > and</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > estimate</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Arm</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > worker;</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > match</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > local</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > credentials</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-B-1"
+          data-look="neo"
+          transform="translate(766.7375869750977, 147.70000457763672)"
+        >
+          <rect
+            class="basic label-container"
+            style=""
+            x="-160.6162109375"
+            y="-31.900001525878906"
+            width="321.232421875"
+            height="63.80000305175781"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Build</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > image;</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > record</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > create</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > intents</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Create</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > owned</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > Volume</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > and</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > Sandbox</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-C-3"
+          data-look="neo"
+          transform="translate(662.9294815063477, 285.9072901407877)"
+        >
+          <rect
+            class="basic label-container"
+            style=""
+            x="-139.09375"
+            y="-31.900001525878906"
+            width="278.1875"
+            height="63.80000305175781"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Commit</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > runtime</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > start</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > gate</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Before</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > any</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > workload</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > execution</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-D-5"
+          data-look="neo"
+          transform="translate(513.3757705688477, 406.9109344482422)"
+        >
+          <rect
+            class="basic label-container"
+            style=""
+            x="-187.607421875"
+            y="-31.900001525878906"
+            width="375.21484375"
+            height="63.80000305175781"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Run</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > with</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > fixed</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > time</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > limits</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Checkpoint,</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > stop</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > children,</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > publish</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > manifest</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-E-7"
+          data-look="neo"
+          transform="translate(662.9294815063477, 510.7109375)"
+        >
+          <rect
+            class="basic label-container"
+            style=""
+            x="-167.6015625"
+            y="-31.900001525878906"
+            width="335.203125"
+            height="63.80000305175781"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Verify</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > compute</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > stopped</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Owned</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > receipt</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > and</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > two</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > terminal</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > reads</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-F-11"
+          data-look="neo"
+          transform="translate(543.6950531005859, 720.0797958374023)"
+        >
+          <polygon
+            points="137.4688491821289,0 274.9376983642578,-137.4688491821289 137.4688491821289,-274.9376983642578 0,-137.4688491821289"
+            class="label-container"
+            transform="translate(-136.9688491821289, 137.4688491821289)"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Complete</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > and</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > consistent</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >output</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > manifest?</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-G-13"
+          data-look="neo"
+          transform="translate(197.1171875, 1506.183017730713)"
+        >
+          <rect
+            class="basic label-container"
+            style=""
+            x="-185.1171875"
+            y="-41.79999923706055"
+            width="370.234375"
+            height="83.5999984741211"
+          />
+          <g class="label" style="" transform="translate(0, -29.799999237060547)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Back</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > up</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > every</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > file</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Check</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > manifest</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > bytes,</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > hashes</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > and</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > second</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="2.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >reads</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-H-15"
+          data-look="neo"
+          transform="translate(766.0651041666665, 1180.865837097168)"
+        >
+          <polygon
+            points="179.5171890258789,0 359.0343780517578,-179.5171890258789 179.5171890258789,-359.0343780517578 0,-179.5171890258789"
+            class="label-container"
+            transform="translate(-179.0171890258789, 179.5171890258789)"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Recorded</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > no-start</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > protocol</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >No</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > gate;</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > exact</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > uploaded</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > inventory?</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-I-17"
+          data-look="neo"
+          transform="translate(674.5065104166666, 1506.183017730713)"
+        >
+          <rect
+            class="basic label-container"
+            style=""
+            x="-163.1171875"
+            y="-31.900001525878906"
+            width="326.234375"
+            height="63.80000305175781"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Back</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > up</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > inputs;</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > verify</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > upload</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > hashes</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Eligible</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > for</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > no_capacity</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > after</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > cleanup</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-J-19"
+          data-look="neo"
+          transform="translate(628.4830729166666, 1619.8830184936523)"
+        >
+          <rect
+            class="basic label-container"
+            style=""
+            x="-148.0703125"
+            y="-31.900001525878906"
+            width="296.140625"
+            height="63.80000305175781"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Flush</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > files</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > and</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > POSIX</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > directories</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Save</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > durable</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > backup</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > receipt</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-K-23"
+          data-look="neo"
+          transform="translate(498.69791666666663, 1723.6830215454102)"
+        >
+          <rect
+            class="basic label-container"
+            style=""
+            x="-162.5703125"
+            y="-31.900001525878906"
+            width="325.140625"
+            height="63.80000305175781"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Delete</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > Volume</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > by</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > receipted</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > ID</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Confirm</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > absence</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > twice;</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > record</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > result</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-L-25"
+          data-look="neo"
+          transform="translate(370.39713541666674, 1827.483024597168)"
+        >
+          <rect
+            class="basic label-container"
+            style=""
+            x="-138.6015625"
+            y="-31.900001525878906"
+            width="277.203125"
+            height="63.80000305175781"
+          />
+          <g class="label" style="" transform="translate(0, -19.900001525878906)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Keep</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > verified</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > local</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > backup</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Storage</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > billing</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > can</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > lag</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > deletion</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default"
+          id="my-svg-flowchart-O-27"
+          data-look="neo"
+          transform="translate(1248.3439483642578, 277.30546951293945)"
+        >
+          <path
+            d="M0,17.203640899699842 a137.9140625,17.203640899699842 0,0,0 275.828125,0 a137.9140625,17.203640899699842 0,0,0 -275.828125,0 l0,81.00364395145766 a137.9140625,17.203640899699842 0,0,0 275.828125,0 l0,-81.00364395145766"
+            class="basic label-container outer-path"
+            style=""
+            transform="translate(-137.9140625, -57.70546287542867)"
+          />
+          <g class="label" style="" transform="translate(0, -9.900003433227539)">
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style=""><tspan class="text-outer-tspan row" x="0" y="-0.1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Local</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > ledger</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > only</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Offline</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > status,</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > wait,</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > list</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > and</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > logs</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default retained"
+          id="my-svg-flowchart-M-29"
+          data-look="neo"
+          transform="translate(1022.3846384684243, 929.4486541748047)"
+        >
+          <rect
+            class="basic label-container"
+            style="fill:#fff5dc !important;stroke:#b58a25 !important"
+            x="-145.8154296875"
+            y="-31.900001525878906"
+            width="291.630859375"
+            height="63.80000305175781"
+          />
+          <g
+            class="label"
+            style="color:#483a18 !important"
+            transform="translate(0, -19.900001525878906)"
+          >
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style="fill:#483a18 !important"><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+  ><tspan font-style="normal" class="text-inner-tspan" font-weight="normal">Preserve</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > receipts</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > and</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > resources</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >No</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > create</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > retry;</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > explicit</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > recovery</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+        <g
+          class="node default retained"
+          id="my-svg-flowchart-N-33"
+          data-look="neo"
+          transform="translate(585.7836537679036, 1971.2830276489258)"
+        >
+          <rect
+            class="basic label-container"
+            style="fill:#fff5dc !important;stroke:#b58a25 !important"
+            x="-145.0810546875"
+            y="-31.900001525878906"
+            width="290.162109375"
+            height="63.80000305175781"
+          />
+          <g
+            class="label"
+            style="color:#483a18 !important"
+            transform="translate(0, -19.900001525878906)"
+          >
+            <rect />
+            <g><rect class="background" style="stroke: none" /><!-- prettier-ignore-start -->
+<text y="-10.1" style="fill:#483a18 !important"><tspan
+    class="text-outer-tspan row"
+    x="0"
+    y="-0.1em"
+    dy="1.1em"
+  ><tspan font-style="normal" class="text-inner-tspan" font-weight="normal">Storage</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > cleanup</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > unverified</tspan></tspan><tspan class="text-outer-tspan row" x="0" y="1em" dy="1.1em"><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    >Keep</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > ledger</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > for</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > explicit</tspan><tspan
+      font-style="normal"
+      class="text-inner-tspan"
+      font-weight="normal"
+    > recovery</tspan></tspan></text>
+<!-- prettier-ignore-end --></g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+  <defs>
+    <filter id="my-svg-drop-shadow" height="130%" width="130%">
+      <feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000" />
+    </filter>
+  </defs>
+  <defs>
+    <filter id="my-svg-drop-shadow-small" height="150%" width="150%">
+      <feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000" />
+    </filter>
+  </defs>
+  <linearGradient
+    id="my-svg-gradient"
+    gradientUnits="objectBoundingBox"
+    x1="0%"
+    y1="0%"
+    x2="100%"
+    y2="0%"
+  >
+    <stop offset="0%" stop-color="#3864a2" stop-opacity="1" />
+    <stop
+      offset="100%"
+      stop-color="hsl(154.2857142857, 1.1764705882%, 83.3333333333%)"
+      stop-opacity="1"
+    />
+  </linearGradient>
+</svg>

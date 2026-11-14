@@ -1,0 +1,2 @@
+# The sole provider SDK; transitive dependencies are pinned in requirements.lock.txt.
+modal==1.6.4
