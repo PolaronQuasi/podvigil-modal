@@ -14,6 +14,46 @@ from tests.support.modal import FakeModal, job
 
 
 class NoCapacity(unittest.TestCase):
+    def test_slow_image_reports_no_resources_without_recovery_advice(self):
+        for raises in (False, True):
+            with self.subTest(raises=raises), tempfile.TemporaryDirectory() as directory:
+                folder = Path(directory)
+                config = self.record["config"].copy()
+                config["startup_timeout_seconds"] = 5
+                job(folder, config)
+                now = [time.time()]
+                cloud = FakeModal()
+
+                def build(allowance):
+                    cloud.call("build_image")
+                    now[0] += allowance + 1
+                    if raises:
+                        raise TimeoutError("private provider message")
+
+                cloud.build_image = build
+                runner.execute(folder, cloud, clock=lambda: now[0], sleep=lambda _: None)
+                result = state.status(folder)
+                self.assertEqual(result["outcome"], "no_capacity")
+                self.assertEqual(result["failed_phase"], "building image")
+                self.assertIn("image was not ready within the startup allowance", result["error"])
+                self.assertIn("no Sandbox or Volume resources were requested", result["error"])
+                self.assertNotIn("recover", result["error"])
+                self.assertNotIn("private provider message", result["error"])
+                self.assertNotIn("create_volume", cloud.calls)
+                self.assertNotIn("create_sandbox", cloud.calls)
+
+    def test_early_image_exception_is_not_a_no_capacity_inference(self):
+        folder = self.folder / "early"
+        config = self.record["config"].copy()
+        config["startup_timeout_seconds"] = 60
+        job(folder, config)
+        cloud = FakeModal()
+        cloud.build_image = lambda _: (_ for _ in ()).throw(TimeoutError("provider text"))
+        runner.execute(folder, cloud, sleep=lambda _: None)
+        result = state.status(folder)
+        self.assertEqual(result["outcome"], "error")
+        self.assertNotEqual(result["error"], runner.IMAGE_START_EXPIRED)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
