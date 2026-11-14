@@ -22,6 +22,7 @@ class ReviewBoundaries(unittest.TestCase):
         with patch.object(provider, "sdk", return_value=self.sdk):
             self.provider = provider.Provider(spec())
         self.job = {
+            "deadline": time.time() + 90,
             "job_id": "job",
             "owner": "owner",
             "sandbox": {"id": "sb-test", "name": "test"},

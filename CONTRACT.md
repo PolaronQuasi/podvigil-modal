@@ -7,8 +7,12 @@ The sole provider is Modal. Each launch owns at most one Sandbox and one Volume.
 2. Persist creation intent before issuing each request. An ambiguous request is never repeated.
 3. Store returned IDs and verify Sandbox ownership tags before termination.
 4. Maintain a fixed deadline; recovery never creates compute or extends it. With an explicit startup
-   allowance, set the deadline once at launch to startup plus run allowances. Provider and
-   supervisor run time remain bounded by the run allowance, even when startup is early.
+   allowance, set the deadline once at launch to startup plus run allowances. The supervisor and
+   local worker bound the run by its run allowance, even when startup is early. Modal's independent
+   timeout instead uses whole seconds remaining until the fixed deadline at create, rounded down and
+   capped at 86400. It is not a separate native run-allowance limit. If startup plus run exceeds 24
+   hours, that cap can end the container before the full run/finalization window. Provider timer
+   start semantics still require live validation; the local fixed deadline is never extended.
 5. Retry transient observations without cancelling healthy work. Observability failure must not
    prevent termination when cancellation or a deadline requires it. Only two consecutive terminal
    observations establish stopped compute; failed observations do not count.

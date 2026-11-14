@@ -165,6 +165,9 @@ class ModalSpec(unittest.TestCase):
 class ModalProvider(unittest.TestCase):
     def setUp(self):
         self.sdk = Mock()
+        clock = patch("podvigil.modal_backend.provider.time.time", return_value=100)
+        clock.start()
+        self.addCleanup(clock.stop)
         bounded = patch(
             "podvigil.modal_backend.provider.bounded_create",
             side_effect=lambda create, allowance, *args, **kwargs: create(*args, **kwargs),
@@ -174,6 +177,7 @@ class ModalProvider(unittest.TestCase):
         with patch("podvigil.modal_backend.provider.sdk", return_value=self.sdk):
             self.provider = Provider(spec())
         self.job = {
+            "deadline": 140,
             "job_id": "job",
             "owner": "owner",
             "sandbox": {"id": "sb-owned", "name": "test"},
