@@ -86,6 +86,10 @@ overall deadline is fixed at launch to the sum of both allowances. Early startup
 startup time to the run budget. Supervisor initialization and its start-gate commit consume part of
 the run allowance. Omit the new field to retain the legacy overall allowance.
 
+Modal's own Sandbox timeout uses whole seconds left to the fixed deadline at create, capped at 86400
+seconds. The supervisor and worker still enforce the run allowance. When startup plus run exceeds 24
+hours, the provider cap may interrupt finalization before the later fixed deadline.
+
 New jobs use the start protocol in either mode: if the supervisor enters after its start deadline
 (the overall deadline when no startup field is supplied), it exits before writing to the Volume.
 Recovery still requires terminal observations and a verified inputs-only backup for `no_capacity`.

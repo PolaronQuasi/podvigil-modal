@@ -54,6 +54,11 @@ With a separate startup allowance, `startup_deadline` and the final `deadline` a
 launch. The runtime's committed start gate provides a bounded `run_deadline`; it cannot extend the
 final deadline. Recovery never resets these values. The run budget includes finalization.
 
+The provider timeout is separately set at create to whole seconds left until the fixed deadline,
+rounded down and capped at 86400. It is not an independent native run-budget limit. The worker and
+supervisor keep their run limits; a combined allowance above 24 hours can meet the provider cap
+before finalization finishes. This timer alignment still needs a live Modal check.
+
 ## Recovery
 
 Use an explicit path or ID when `cancel latest` or `recover latest` reports a skipped, unreadable

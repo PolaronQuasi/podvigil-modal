@@ -199,11 +199,19 @@ create, and deletion still uses the verified ID.
 ### Startup and run allowances
 
 `startup_timeout_seconds` optionally allows 1–86400 seconds for startup. The fixed absolute deadline
-is set at launch before staging and arming, to startup plus `timeout_seconds`. The Sandbox provider
-timeout is exactly the run allowance; the supervisor also enforces that allowance from entry,
-including metadata commit and finalization, capped by the absolute deadline. Startup that finishes
-early does not lengthen the run. The price estimate uses only `timeout_seconds` and plan reports
-both allowances. Without the new field, the previous overall timeout semantics remain.
+is set at launch before staging and arming, to startup plus `timeout_seconds`. At the Sandbox create
+call, the provider timeout is the whole number of seconds remaining to the fixed deadline, rounded
+down and capped at 86400. This applies in both modes. The supervisor enforces the run allowance from
+entry, including metadata commit and finalization, capped by the absolute deadline. Startup that
+finishes early does not lengthen the run. The price estimate uses only `timeout_seconds` and plan
+reports both allowances. Without the new field, the previous overall timeout semantics remain.
+
+Modal's own timeout therefore follows the fixed-deadline budget, not an independent run allowance.
+The local worker and supervisor retain their run limits. If startup plus run exceeds 24 hours, the
+provider cap can expire before the full run/finalization window even though the fixed deadline is
+later. A sub-second remainder refuses creation rather than passing zero. The SDK create-wait bound
+still uses the startup allowance. Exactly when Modal starts its timeout clock requires live
+validation; this relative timeout alone is not proof of termination at an absolute wall-clock time.
 
 A protocol-1 supervisor entering after that overall deadline exits with code 75 before any Volume
 write. Exact inputs-only inventory and verified terminal compute can then establish `no_capacity`
@@ -219,7 +227,7 @@ margin to expire.
 The run window begins at supervisor entry, so initialization, GPU discovery and the committed gate
 consume some of it. `finalize_seconds` remains inside that allowance. The workload receives the
 remaining pre-finalization seconds, not the full configured duration. The native Sandbox timeout
-independently uses the configured run allowance, however early startup completes.
+uses the separately described fixed-deadline budget and 24-hour cap.
 
 ### Resource visibility and cost
 
@@ -287,6 +295,11 @@ four days. No command claims all charges ended just because compute stopped. Con
 workspace budgets separately; this backend does not change account budgets.
 
 ## Verification and sources
+
+The third-review provider-timeout change (T-01) has only mocked-SDK validation. An owner-authorized
+live job with a startup allowance and a workload that sleeps past its run limit must produce a
+`time_limit` manifest, followed by verified backup and cleanup. Check cold/queued starts and the
+24-hour cap separately; offline tests cannot establish Modal's timer origin or commit visibility.
 
 The ordinary suite uses in-memory fakes only. Install the pinned Modal dependency to run the offline
 SDK signature contract test. Linux integration tests run the real entrypoint locally, including

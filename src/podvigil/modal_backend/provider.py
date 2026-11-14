@@ -129,6 +129,11 @@ class Provider:
             raise CreateNotSent(
                 "Sandbox creation was not sent because its Volume could not be loaded. No compute was created by this attempt."
             ) from None
+        timeout = min(86400, math.floor(job["deadline"] - time.time()))
+        if timeout <= 0:
+            raise CreateNotSent(
+                "Sandbox creation was not sent because no whole second remains before the fixed deadline."
+            )
         sandbox = bounded_create(
             self.modal.Sandbox.create,
             remaining,
@@ -139,7 +144,7 @@ class Provider:
             name=job["sandbox"]["name"],
             tags={"podvigil_job": job["job_id"], "podvigil_owner": job["owner"]},
             image=self.image,
-            timeout=spec["timeout_seconds"] if "startup_timeout_seconds" in spec else remaining,
+            timeout=timeout,
             gpu=spec.get("gpu"),
             cpu=(spec["cpu"], spec["cpu"]),
             memory=(spec["memory_mib"], spec["memory_mib"]),
