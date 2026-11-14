@@ -105,6 +105,10 @@ is the requested physical-core allocation; `os.cpu_count()` and affinity can exp
 number. Set framework thread counts deliberately. GPU identity is sampled via `nvidia-smi`, or
 `unknown` when unavailable (`none` for a CPU job without a detected GPU).
 
+Initial GPU discovery may wait up to ten seconds for a cold driver. It leaves a 0.25-second launch
+margin within the start deadline and useful run window, and is skipped with less than 0.1 seconds
+available after that margin. Later samples retain their one-second timeout.
+
 An optional `workload_env` map supplies non-secret child settings, for example
 `{"OMP_NUM_THREADS": "2", "TOKENIZERS_PARALLELISM": "false"}`. Values are saved in plaintext in job
 records and uploaded metadata. It is not a secret store. Names must match
