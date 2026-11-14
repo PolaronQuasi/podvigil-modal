@@ -182,6 +182,10 @@ The reported large-image timeouts are not evidence of a universal size limit. Ch
 startup allowance and inspect phase timing before raising it. No timeout automatically retries a
 create. See [slow-start outcomes](OPERATIONS.md#slow-start-outcomes).
 
+An image that misses the startup allowance returns `no_capacity` with `failed_phase: building image`
+and a message confirming that no Sandbox or Volume was requested. This phase distinguishes image
+preparation from an attempted container start without changing the outcome code.
+
 New jobs commit `runtime-start.json` before launching workload code. After two terminal reads,
 absence of that gate is useful only with the recorded protocol and an exact uploaded inventory whose
 bytes verify twice. That narrow case cleans its backed-up inputs and returns `no_capacity` (4).

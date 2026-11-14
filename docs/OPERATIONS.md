@@ -218,6 +218,11 @@ can outlive either. Review [operational limits](MODAL.md#operational-limits).
 
 For startup failures, callers should distinguish these three cases:
 
+Read `failed_phase` alongside the outcome: `building image` means the image was not ready within the
+startup allowance, before any Sandbox or Volume request; `waiting for container` means the Sandbox
+start was attempted. Both can return `no_capacity` with appropriate no-start evidence. The
+image-timeout message needs no recovery action because no Sandbox or Volume was requested.
+
 | Outcome                | Evidence and next step                                                                                                                                                                                          |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `no_capacity` (4)      | Recorded evidence proves the workload never started; any inputs-only Volume has been verified, backed up and deleted. A later launch is an explicit caller decision.                                            |

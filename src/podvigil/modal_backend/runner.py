@@ -20,6 +20,11 @@ from .state import best_effort_update, jobs_dir, load, remaining_outcome, status
 from .errors import UserError, LifecycleError, CreateNotSent, job_lock, record_error, safe_error
 from . import logs
 
+IMAGE_START_EXPIRED = (
+    "The image was not ready within the startup allowance; "
+    "no Sandbox or Volume resources were requested."
+)
+
 
 def launch(path, *, detach=False, progress=lambda line: None):
     spec, sources = read_spec(path)
@@ -164,7 +169,10 @@ def execute(folder, provider, *, clock=time.time, sleep=time.sleep):
                     "sandbox_create_not_sent": True,
                     "volume_create_not_sent": True,
                 },
-                error="Startup ended before resource creation.",
+                error=IMAGE_START_EXPIRED
+                if "startup_deadline" in job and not (folder / "cancel.json").exists()
+                else "Startup ended before resource creation.",
+                failed_phase="building image",
             )
             return
         data = {
@@ -315,7 +323,9 @@ def execute(folder, provider, *, clock=time.time, sleep=time.sleep):
             job,
             phase="finished",
             outcome=cleaned_outcome or remaining_outcome(job),
-            error=safe_error(exc),
+            error=IMAGE_START_EXPIRED
+            if cleaned_outcome == "no_capacity" and failed_phase == "building image"
+            else safe_error(exc),
             failed_phase=failed_phase,
         )
 
