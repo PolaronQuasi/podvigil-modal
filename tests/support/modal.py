@@ -1,6 +1,6 @@
 """In-memory Modal service. No SDK, credentials, sockets or billable resources."""
 
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import hashlib
 import json
@@ -22,7 +22,8 @@ def spec():
         "finalize_seconds": 10,
         "estimated_hourly_usd": 1,
         "max_compute_cost_usd": 0.1,
-        "rate_checked_utc": datetime.now(timezone.utc).isoformat(),
+        # Keep dummy quotes strictly in the past even when Windows clocks round differently.
+        "rate_checked_utc": (datetime.now(timezone.utc) - timedelta(seconds=1)).isoformat(),
         "command": ["python3", "train.py"],
         "inputs": [],
         "required_artifacts": ["result.txt"],
