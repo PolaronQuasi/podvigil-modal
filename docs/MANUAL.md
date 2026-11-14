@@ -24,6 +24,11 @@ characters. `latest` means newest launch by creation time, not last update. Olde
 immutable `job.json` sentinel timestamp. Full ledger paths remain usable across changes to the
 installation or default state directory.
 
+Observers skip unreadable ledgers with a warning. `cancel latest` and `recover latest` refuse if a
+skipped job may be newer: its immutable `job.json` creation timestamp, or that file's modification
+time, must establish it is not newer than the selected job. If the age is unknown, pass an explicit
+ledger path or job ID instead. ID-prefix selection is unchanged.
+
 Results are JSON on stdout; progress is on stderr. `launch --detach` prints one JSON object on one
 line, including `job_id` and `ledger`, after the worker is armed and released. Code 9 means handed
 off, even if image preparation or GPU scheduling has not finished. Use the returned path for

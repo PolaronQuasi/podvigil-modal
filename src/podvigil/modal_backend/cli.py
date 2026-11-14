@@ -89,7 +89,9 @@ def run_cli(argv):
 
             result, outcome = launch(args.config, detach=args.detach, progress=say)
         else:
-            folder = state.find_job(args.job, warn=say)
+            folder = state.find_job(
+                args.job, for_mutation=args.action in ("cancel", "recover"), warn=say
+            )
             if args.action == "status":
                 result = state.status(folder)
             elif args.action == "logs":

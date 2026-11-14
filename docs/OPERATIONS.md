@@ -56,6 +56,12 @@ final deadline. Recovery never resets these values. The run budget includes fina
 
 ## Recovery
 
+Use an explicit path or ID when `cancel latest` or `recover latest` reports a skipped, unreadable
+ledger that is newer or cannot be dated. These commands refuse before touching another job.
+Read-only observers continue to skip unreadable jobs with warnings. Selection uses immutable
+`job.json` creation evidence, falling back to its modification time, never the active ledger's
+mtime.
+
 Use the exact ledger path when dealing with an interrupted job:
 
 ```sh

@@ -74,6 +74,10 @@ outside its bounded startup phase, reporting what may remain. `--timeout` return
 terminal watchdog, stalled-loop and interruption diagnostics also go to stderr. JSON results go to
 stdout.
 
+`cancel latest` and `recover latest` do not silently select an older job when an unreadable ledger
+has newer or unknown creation evidence. They name the skipped folder and require an explicit path or
+ID. `status`, `wait` and `logs` retain their read-only selection behavior.
+
 Ctrl+C on launch, or `cancel`, writes a local cancellation request. A live worker signals the
 supervisor to finalize, then falls back to termination within the original deadline. Publication can
 still fail, leaving storage retained. An in-flight SDK create handles cancellation when it returns

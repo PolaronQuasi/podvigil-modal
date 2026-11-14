@@ -53,17 +53,41 @@ def list_jobs():
     return rows
 
 
-def find_job(name, *, warn=lambda line: print(line, file=sys.stderr)):
+def skipped_creation_time(folder):
+    """Use the immutable launch sentinel, never the active ledger's modification time."""
+    sentinel = folder / "job.json"
+    try:
+        record = read(sentinel)
+        stamp = datetime.fromisoformat(record["created_utc"].replace("Z", "+00:00"))
+        if stamp.tzinfo is not None:
+            return stamp.timestamp()
+    except (OSError, ValueError, TypeError, KeyError, AttributeError, OverflowError):
+        pass
+    try:
+        value = sentinel.stat().st_mtime
+        return value if math.isfinite(value) else None
+    except OSError:
+        return None
+
+
+def find_job(name, *, for_mutation=False, warn=lambda line: print(line, file=sys.stderr)):
     path = Path(name)
     if (path / "modal-job.json").is_file() or path.is_dir():
         try:
             load(path)
+        except UserError:
+            raise
         except (OSError, ValueError, TypeError) as exc:
             raise UserError(f"Cannot read Modal ledger {path}: {type(exc).__name__}.") from None
         return path.resolve()
     if name != "latest" and not re.fullmatch(r"[0-9a-f]{4,32}", name):
         raise UserError("No Modal ledger at that path.")
     folders = list(jobs_dir().glob("*/modal-job.json"))
+    if name == "latest" and for_mutation:
+        # Launch writes job.json first. An interrupted launch without its ledger also counts.
+        folders = list(
+            set(folders) | {p.parent / "modal-job.json" for p in jobs_dir().glob("*/job.json")}
+        )
 
     def created(path, record):
         try:
@@ -78,13 +102,23 @@ def find_job(name, *, warn=lambda line: print(line, file=sys.stderr)):
             value = sentinel.stat().st_mtime if sentinel.is_file() else 0
         return value, path.parent.name
 
-    readable = []
+    readable, skipped = [], []
     for ledger in folders:
         try:
             record = load(ledger.parent)
             readable.append((created(ledger, record), ledger))
         except (OSError, ValueError, TypeError, KeyError) as exc:
+            skipped.append(ledger.parent)
             warn(f"Skipping unreadable Modal ledger {ledger.parent} ({type(exc).__name__}).")
+    if name == "latest" and for_mutation and readable:
+        chosen_time = max(key for key, _ in readable)[0]
+        for folder in sorted(skipped):
+            age = skipped_creation_time(folder)
+            if age is None or age > chosen_time:
+                raise UserError(
+                    f"Cannot select latest: skipped ledger {folder} may be newer. "
+                    "Pass a ledger path or an explicit job ID for cancel or recover."
+                )
     folders = [ledger for _, ledger in sorted(readable, key=lambda item: item[0], reverse=True)]
     matches = (
         folders[:1] if name == "latest" else [p for p in folders if p.parent.name.startswith(name)]
